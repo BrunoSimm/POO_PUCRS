@@ -1,7 +1,12 @@
 public class App {
+
+    public enum NomeTeste {
+        asdasd,
+        asdasd2
+    }
     public static void main(String args[]){
         Cofrinho cofrinho = new Cofrinho(12);
-
+        
         cofrinho.insereMoeda(new Moeda(NomeMoeda.UmReal));
         cofrinho.insereMoeda(new Moeda(NomeMoeda.CinquentaCentavos));
         cofrinho.insereMoeda(new Moeda(NomeMoeda.VinteCincoCentavos));

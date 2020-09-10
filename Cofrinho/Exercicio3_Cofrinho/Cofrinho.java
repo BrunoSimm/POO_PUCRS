@@ -11,7 +11,7 @@ public class Cofrinho {
     public void insereMoeda(Moeda novaMoeda){
         if (moedas.size() <= this.tamanhoCofre){
             moedas.add(novaMoeda);
-        } else System.out.println("Numero limite de moedas atingido!");
+        } else System.err.println("Numero limite de moedas atingido!");
     }
 
     public String retira_ultimaMoeda(){
