@@ -17,7 +17,7 @@ public class Catalogo {
     }
     //Necessário arrumar a "tabela" de preços
     public void getProdutos() {
-        System.out.println("---------CATALOGO--------");
+        System.out.println("\n---------CATALOGO--------");
         System.out.println("Codigo | Produto | Preço");
         for (Produto item: produtos){
             System.out.println(item.getCodigo()+ "       " + item.getDescricao()

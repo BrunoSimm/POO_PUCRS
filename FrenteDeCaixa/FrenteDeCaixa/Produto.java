@@ -4,41 +4,42 @@ public class Produto {
     private double preco;
 
     public Produto(int codigo, String descricao, double preco) {
-        this.codigo = codigo;
-        this.descricao = descricao + "";
-        this.preco = preco;
+        if (codigo < 0){
+            this.codigo = 0;
+        } else this.codigo = codigo;
+        
+        if (descricao.isEmpty() == true){
+            this.descricao = "Inválido";
+        } else this.descricao = descricao;
+
+        if (preco >= 0){
+            this.preco = preco;
+        } else this.preco = 0;
     }
-    //Rever getters e setters necessários
     public int getCodigo() {
-        return codigo;
+        return this.codigo;
     }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
     public String getDescricao() {
-        return descricao;
+        return this.descricao;
     }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescricao(String novaDescricao) {
+        if (descricao.isEmpty() != true){
+            this.descricao = novaDescricao;
+        }
     }
 
     public double getPreco() {
-        return preco;
+        return this.preco;
     }
 
     public void setPreco(double preco) {
-        this.preco = preco;
+        if (preco >= 0){
+            this.preco = preco;
+        }
     }
 
     @Override
     public String toString() {
         return "Produto [codigo=" + codigo + ", descricao=" + descricao + ", preco=" + preco + "]";
     }
-
-
-
-    
 }

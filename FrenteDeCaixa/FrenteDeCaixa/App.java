@@ -14,13 +14,16 @@ public class App {
 
         catalogo1.getProdutos(); //Relação de todos os produtos cadastrados no catalogo.
 
-
-        //Instânciando novo estoque e adicionando produtos do catalogo.
+        //Instânciando novo estoque e adicionando produtos do catalogo ao estoque.
         Estoque estoque1 = new Estoque ();
-        estoque1.cadastraProduto(catalogo1.getProduto(1), 80); //Código do produto, qtd
-        estoque1.cadastraProduto(catalogo1.getProduto(2), 40);
+        System.out.println("\nAdicionando produtos e suas quantidades iniciais ao estoque:\n");
+        estoque1.cadastraProduto(catalogo1.getProduto(1), 25); //Código do produto, qtd
+        estoque1.cadastraProduto(catalogo1.getProduto(2), 15);
+        estoque1.cadastraProduto(catalogo1.getProduto(3), 100);
+        estoque1.cadastraProduto(catalogo1.getProduto(4), 30);
+        estoque1.cadastraProduto(catalogo1.getProduto(5), 45);
 
-        System.out.println("Quantidade em estoque: "+ estoque1.getQuantidade(1));
+        System.out.println("\nQuantidade em estoque: "+ estoque1.getQuantidade(1));
         estoque1.baixaEstoque(1, 5);
         System.out.println("Quantidade em estoque: " + estoque1.getQuantidade(1));
         estoque1.reposicaoEstoque(1, 50);
