@@ -15,13 +15,13 @@ public class Catalogo {
         }
         return null;
     }
-
+    //Necessário arrumar a "tabela" de preços
     public void getProdutos() {
         System.out.println("---------CATALOGO--------");
         System.out.println("Codigo | Produto | Preço");
         for (Produto item: produtos){
-            System.out.println(item.getCodigo()+ "       "
-            + item.getDescricao().subSequence(0, 9)+ "    "+item.getPreco());
+            System.out.println(item.getCodigo()+ "       " + item.getDescricao()
+            .subSequence(0, (item.getDescricao().length() > 9 ? 9 : item.getDescricao().length()))+ "\t  "+ String.valueOf(item.getPreco()).subSequence(0,(String.valueOf(item.getPreco()).length() >= 7 ? 7 : (String.valueOf(item.getPreco()).length()))));
         }
         System.out.println("-------------------------");
     }
