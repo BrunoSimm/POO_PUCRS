@@ -5,7 +5,7 @@ public class Produto {
 
     public Produto(int codigo, String descricao, double preco) {
         this.codigo = codigo;
-        this.descricao = descricao;
+        this.descricao = descricao.trim();
         this.preco = preco;
     }
     //Rever getters e setters necessários
