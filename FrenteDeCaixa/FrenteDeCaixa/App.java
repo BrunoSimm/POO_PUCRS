@@ -30,7 +30,16 @@ public class App {
         System.out.println("Quantidade em estoque: " + estoque1.getQuantidade(1));
 
 
-        estoque1.cadastraProduto(new Produto(20,"TV 59",4500), 50);
 
-    }
+        //Instânciando novo histórico de vendas.
+        HistoricoVendas historicoVendas = new HistoricoVendas();
+
+        //Instanciando nova venda e adicionando itens de venda.
+        Venda venda1 = new Venda(historicoVendas);
+        venda1.insereItem(catalogo1.getProduto(1), 5, estoque1);
+        venda1.insereItem(catalogo1.getProduto(2), 21, estoque1);
+        venda1.insereItem(catalogo1.getProduto(3), 2, estoque1);
+
+        venda1.getItens();
+    }   
 }

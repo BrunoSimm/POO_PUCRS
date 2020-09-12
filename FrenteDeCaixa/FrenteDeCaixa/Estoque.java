@@ -7,10 +7,11 @@ public class Estoque {
         this.itens = new ArrayList<ItemDeEstoque>();
     }
     public void cadastraProduto(Produto produto,int quantidadeInicial){
-        // caso seja passado um código de produto errado ao getProdutos() do catalogo ou quantidade inicial inválida.
+        // caso seja passado um código de produto errado ao getProduto() do catalogo ou quantidade inicial inválida.
         if (produto != null && quantidadeInicial >= 0){
-            ItemDeEstoque item = new ItemDeEstoque(produto, quantidadeInicial);
-            this.itens.add(item);
+            //ItemDeEstoque item = new ItemDeEstoque(produto, quantidadeInicial);
+            //this.itens.add(item);
+            this.itens.add(new ItemDeEstoque(produto, quantidadeInicial));
             System.out.println(quantidadeInicial +" "+ produto.getDescricao() + "'s adicionados ao estoque");
         }
     }
