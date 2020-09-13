@@ -55,7 +55,7 @@ public class App {
         venda2.insereItem(catalogo1.getProduto(4), 8, estoque1);
         venda2.removeItem(catalogo1.getProduto(1));
         venda2.concluirVenda(historicoVendas, estoque1, venda2);
-        
+
         //venda1.imprimeRecibo();
         historicoVendas.getUltimasVendas(2);
         

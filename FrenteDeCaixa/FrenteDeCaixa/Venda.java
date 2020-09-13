@@ -18,7 +18,7 @@ public class Venda {
         System.out.println("----------VENDA"+this.numero+"----------");
         System.out.println("Itens - Quantidade - Preço");
         for(ItemDeVenda item: itens){
-                System.out.println(item.getProduto().getDescricao()+ "\t "+ item.getQuantidade()+" \t\t\t"+item.getProduto().getPreco());
+                System.out.println(item.getProduto().getDescricao()+ "\t "+ item.getQuantidade()+" \t\t\t"+item.getPrecoDeVenda());
         }
         System.out.println("--------------------------");
 
@@ -30,7 +30,7 @@ public class Venda {
             System.out.println(quantidade +" "+ produto.getDescricao() + "'s adicionados a Venda '"+this.numero+"'.");
             return true;
         } else {
-            System.err.println("Erro! Quantidade requerida de " +produto.getDescricao() +" MAIOR que disponível em estoque("+estoque.getQuantidade(produto.getCodigo())+").");
+            System.out.println("Erro! Quantidade requerida de " +produto.getDescricao() +" MAIOR que disponível em estoque("+estoque.getQuantidade(produto.getCodigo())+").");
             return false;
         }
     }
