@@ -18,7 +18,7 @@ public class ItemDeVenda {
     }
 
     public double getPrecoDeVenda() {
-        return precoDeVenda;
+        return this.precoDeVenda;
     }
 
     @Override

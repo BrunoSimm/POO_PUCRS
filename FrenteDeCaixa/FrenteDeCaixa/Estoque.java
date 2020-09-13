@@ -38,6 +38,7 @@ public class Estoque {
         for(ItemDeEstoque item: itens){
             if(item.getProduto().getCodigo() == codigo){
                 item.baixaEstoque(quantidade);
+                System.out.println(quantidade+" "+item.getProduto().getDescricao()+" removidos do estoque.");
                 return true;
             }
         }
@@ -48,6 +49,7 @@ public class Estoque {
         for(ItemDeEstoque item: itens){
             if(item.getProduto().getCodigo() == codigo){
                 item.reposicaoEstoque(quantidade);
+                System.out.println(quantidade+" "+item.getProduto().getDescricao()+" adicionados ao estoque.");
                 return true;
             }
         }
