@@ -36,6 +36,6 @@ public class HistoricoVendas {
             for (int i = (vendas.size() - (quantidade)); i < vendas.size(); i++){
                 vendas.get(i).imprimeRecibo();
             }
-        } else System.out.println("Erro! Quantidade superior ao numero de registros de vendas.");
+        } else System.out.println("\nErro! Quantidade requisitada superior ao numero de registros de vendas.");
     }
 }

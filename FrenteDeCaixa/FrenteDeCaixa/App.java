@@ -56,6 +56,27 @@ public class App {
         venda2.removeItem(catalogo1.getProduto(1));
         venda2.concluirVenda(historicoVendas, estoque1, venda2);
 
+
+        System.out.println("-----------------------------------");
+        System.out.println("Realizando operações com a VENDA 3:\n");
+        Venda venda3 = new Venda (historicoVendas);
+        venda3.insereItem(catalogo1.getProduto(1), 2, estoque1);
+        venda3.insereItem(catalogo1.getProduto(2), 4, estoque1);
+        venda3.insereItem(catalogo1.getProduto(3), 2, estoque1);
+        venda3.insereItem(catalogo1.getProduto(4), 5, estoque1);
+        venda3.removeItem(catalogo1.getProduto(3));
+        venda3.concluirVenda(historicoVendas, estoque1, venda3);
+
+        System.out.println("-----------------------------------");
+        System.out.println("Realizando operações com a VENDA 4:\n");
+        Venda venda4 = new Venda (historicoVendas);
+        venda4.insereItem(catalogo1.getProduto(2), 6, estoque1);
+        venda4.insereItem(catalogo1.getProduto(5), 7, estoque1);
+        venda4.insereItem(catalogo1.getProduto(3), 4, estoque1);
+        venda4.insereItem(catalogo1.getProduto(4), 10, estoque1);
+        venda4.removeItem(catalogo1.getProduto(2));
+        venda4.concluirVenda(historicoVendas, estoque1, venda4);
+
         //venda1.imprimeRecibo();
         historicoVendas.getUltimasVendas(2);
         
