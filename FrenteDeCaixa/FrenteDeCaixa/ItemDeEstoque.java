@@ -1,6 +1,6 @@
 public class ItemDeEstoque {
-    Produto produto;
-    int quantidade;
+    private Produto produto;
+    private int quantidade;
 
     public ItemDeEstoque(Produto produto, int quantidade) {
         this.produto = produto;

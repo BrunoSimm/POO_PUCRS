@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Catalogo {
-    ArrayList<Produto> produtos;
+    private ArrayList<Produto> produtos;
 
     public Catalogo() {
         produtos = new ArrayList<Produto>();
