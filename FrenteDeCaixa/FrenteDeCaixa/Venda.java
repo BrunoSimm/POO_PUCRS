@@ -45,6 +45,7 @@ public class Venda {
         System.out.printf("SUBTOTAL: R$ %.2f\n", this.getSubTotal());
         System.out.println("IMPOSTOS: "+ this.getIMPOSTO()*100 +"%");
         System.out.printf("TOTAL: R$ %.2f\n",this.getTotal());
+        System.out.printf("VALOR COM DESCONTO: %.2f\n", this.getTotal() * this.getDesconto());
         System.out.println("**************************\n");
     }
     public boolean concluirVenda(HistoricoVendas historico, Estoque estoque, Venda venda){
@@ -68,14 +69,16 @@ public class Venda {
         return subtotal;
     }
     public double getDesconto(){
-        return 0;
+        if (this.getQtdItens() > 10){
+            return 0.9;
+        } else return 1;
     }
     public double getTotal(){
         double total = 0;
         for(ItemDeVenda item: itens){
             total = total + (item.getPrecoDeVenda() * item.getQuantidade());
         }
-        return total*(1 + this.IMPOSTO);
+        return (total * (1 + this.IMPOSTO)) * this.getDesconto();
     }
     public boolean removeItem(Produto produto){
         for(ItemDeVenda item: itens){
