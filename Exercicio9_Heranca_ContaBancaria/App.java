@@ -6,6 +6,9 @@ public class App {
         c1.retirada(29.99);
         System.out.println("Saldo da conta "+c1.getNroConta()+": R$"+c1.getSaldo());
 
+        String nif = "aaa";
+        
+
         ContaBancaria c2 = new ContaRemunerada(2, "ContaRemunerada", 0, 0.1);
         System.out.println("\n"+c2.getClass());
         c2.deposito(1000);
