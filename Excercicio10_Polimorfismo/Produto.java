@@ -4,7 +4,6 @@ public class Produto {
     private double preco;
 
     public Produto(int codigo, String descricao, double preco) {
-        super();
         this.codigo = codigo;
         this.descricao = descricao;
         this.preco = preco;
@@ -40,7 +39,7 @@ public class Produto {
 
     @Override
     public String toString() {
-        return "Produto [codigo=" + codigo + ", descricao=" + descricao + ", preco=" + preco + "]";
+        return "["+this.getClass().getName()+" Codigo: " + codigo + ", Descricao: " + descricao + ", Preço de Venda: R$ " + this.calculaPrecoConsumidor() + "]";
     }
 
     

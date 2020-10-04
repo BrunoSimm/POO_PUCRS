@@ -14,8 +14,13 @@ public class ProdutosTelefonia extends Produto {
         if (this.isImportado == true){
             return this.getPreco() * 0.5;
         } else {
-            return this.getPreco() * 0.5;
+            return this.getPreco() * 0.1;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "["+this.getClass().getName()+" Codigo: " + this.getCodigo() + ", Descricao: " + this.getDescricao() +", Origem: "+ (this.getIsImportado() == true ? "Importado":"Nacional")+", Preço de Venda: R$ " + this.calculaPrecoConsumidor() + "]";
     }
     
 }

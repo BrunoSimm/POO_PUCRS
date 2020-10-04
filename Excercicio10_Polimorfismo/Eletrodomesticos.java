@@ -13,5 +13,10 @@ public class Eletrodomesticos extends Produto {
         this.aceita220 = novaVoltagem;
     }
 
-    
+    @Override
+    public String toString() {
+        return "["+this.getClass().getName()+" Codigo: " + this.getCodigo() + ", Descricao: " + this.getDescricao() +", Voltagem: "+ (this.getVoltagem220() == true ? "220v":"110v")+", Preço de Venda: R$ " + this.calculaPrecoConsumidor() + "]";
+    }
+
+
 }
