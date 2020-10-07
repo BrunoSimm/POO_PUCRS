@@ -20,7 +20,7 @@ public class ContaComLimite extends ContaBancaria{
     }
 
     @Override
-    public boolean retirada(double valor){
+    public boolean retirada(double valor){//NECESSÁRIO REFATORAR!!!!
         if (valor > (this.saldo + this.limite)){//Saldo insuficiente e valor requisitado maior que o limite
             System.out.println("Valor requisitado maior que o saldo e limite disponível.");
             return false;
@@ -54,4 +54,11 @@ public class ContaComLimite extends ContaBancaria{
             return false;
         }
     }
+    public void defineLimite(double novoLimite){
+        if (novoLimite >=0){
+            this.limite = novoLimite;
+        }
+    }
+
+   
 }
