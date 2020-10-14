@@ -35,21 +35,22 @@ public class Aluno implements Voluntario {
         return codigoVoluntario;
     }
 
-    public void setCodigoVoluntario(String codigoVoluntario) {
-        this.codigoVoluntario = codigoVoluntario;
-    }
     @Override
     public String getNomeVoluntario(){
         if (this.isVoluntario == true){
             return this.nome;
         } else return "Este Funcionário não é Voluntário";
     }
-    @Override
-    public boolean setCodigo(String codigo){//Código de duas letras
+   
+    public boolean setCodigoVoluntario(String codigo){//Código de duas letras
         if (codigo.length() == 2){
             this.codigoVoluntario = codigo;
             return true;
         } else return false;
+    }
+
+    public String getCodigo(){
+        return this.codigoVoluntario;
     }
     
     
