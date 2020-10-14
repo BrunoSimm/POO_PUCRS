@@ -1,4 +1,4 @@
-public class Funcionario implements Voluntario{
+public class Funcionario implements Atleta{
     public static final double LIM_ISENCAO_IR = 2000;
     private String matricula;
     private String nome;
