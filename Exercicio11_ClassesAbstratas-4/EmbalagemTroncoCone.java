@@ -9,7 +9,7 @@ public class EmbalagemTroncoCone extends EmbalagemConica{
 
     @Override
     public String toString() {
-        return "Embalagem "+ this.getClass().getName()+" [codigoReferecia=" + this.getCodigoReferecia() + ", custoUnitario=" + this.getCustoUnitario()+", volume="
+        return super.toString()+ "Embalagem "+ this.getClass().getName()+" [codigoReferecia=" + this.getCodigoReferecia() + ", custoUnitario=" + this.getCustoUnitario()+", volume="
                 + volume + "]." + "\nAtenção, esta embalagem leva mais tempo para ser produzido.";
     }
 

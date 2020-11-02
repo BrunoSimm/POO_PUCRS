@@ -10,5 +10,14 @@ public class App {
         System.out.println(e1);
         System.out.println("Embalagem Diferenciada: "+ verificaDiferenciada(e1));
 
+        Embalagem.qtdade1();
+
+        EmbalagemConica e2 = new EmbalagemTroncoCone(2, "codigoReferecia");
+        
+        System.out.println(e2.getCodigoReferecia());
+        
+        EmbalagemCaixa t = new EmbalagemCaixa(2,"as");
+        System.out.println(t.getCodigoReferecia());
+       
     }
 }

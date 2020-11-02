@@ -17,8 +17,18 @@ public class Embalagem {
 
     @Override
     public String toString() {
-        return "Embalagem "+ this.getClass().getName()+" [codigoReferecia=" + codigoReferecia + ", custoUnitario=" + custoUnitario + ", volume="
+        return "XXXEmbalagem "+ this.getClass().getName()+" [codigoReferecia=" + codigoReferecia + ", custoUnitario=" + custoUnitario + ", volume="
                 + volume + "]";
+    }
+    public static int qtdade1(){
+        return 1;
+
+    }
+
+    public int qtdade2(){
+
+        return 2;
+
     }
 
 }

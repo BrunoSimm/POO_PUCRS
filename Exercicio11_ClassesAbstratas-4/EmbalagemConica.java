@@ -6,4 +6,15 @@ public class EmbalagemConica extends Embalagem{
         this.volume = (Math.PI * (Math.pow(raio,2) * altura)) / 3;
         return this.volume;
     }
+
+    public static int qtdade1(){
+        return 1;
+
+    }
+
+    public int qtdade2(){
+
+        return 2;
+
+    }
 }
