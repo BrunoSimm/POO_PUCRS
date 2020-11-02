@@ -1,8 +1,6 @@
-public class Locomotiva {
-	private int identificador;
+public class Locomotiva extends ElementoDeComposicao{
 	private double pesoMaximo;
 	private int qtdadeMaxVagoes;
-	private int composicao;
 
 	public Locomotiva(int identificador, double pesoMaximo, int qtdadeVagoes) {
 		this.identificador = identificador;
@@ -18,10 +16,6 @@ public class Locomotiva {
 		this.composicao = composicao;
 	}
 
-	public int getIdentificador() {
-		return identificador;
-	}
-
 	public double getPesoMaximo() {
 		return pesoMaximo;
 	}
@@ -29,19 +23,8 @@ public class Locomotiva {
 	public int getQtdadeMaxVagoes() {
 		return qtdadeMaxVagoes;
 	}
-
-	public int getComposicao() {
-		return composicao;
-	}
-
-	public void setComposicao(Composicao composicao) {
-		if (composicao == null) {
-			this.composicao = -1;
-		} else {
-			this.composicao = composicao.getIdentificador();
-		}
-	}
-
+	
+	@Override
 	public String toLineFile(){
 		return this.getIdentificador()+","+
 			this.getPesoMaximo()+","+

@@ -11,16 +11,21 @@ public class App {
 
     public static void main(String args[]) {
         CadastroVagoes cv = new CadastroVagoes();
-        cv.carrega();
+        cv.carrega("VagaoCarga");
+        cv.carrega("VagaoPassageiros");
         CadastroLocomotivas cl = new CadastroLocomotivas();
         cl.carrega();
         CadastroComposicoes cc = new CadastroComposicoes();
         cc.carrega();
 
-        System.out.println("Cadastro de vagoes:");
-        for (int i = 0; i < cv.getQtdade(); i++) {
-            System.out.println(cv.getPorPosicao(i));
-        }
+        System.out.println("Cadastro de vagoes de Carga:");
+            for (int i = 0; i < cv.getQtdade("VagaoCarga"); i++) {
+                System.out.println(cv.getPorPosicao("VagaoCarga",i).toString());
+            }
+        System.out.println("Cadastro de vagoes de Passageiros:");
+            for (int i = 0; i < cv.getQtdade("VagaoPassageiros"); i++) {
+                System.out.println(cv.getPorPosicao("VagaoPassageiros",i).toString());
+            }
         System.out.println("Cadastro de locomotivas:");
         for (int i = 0; i < cl.getQtdade(); i++) {
             System.out.println(cl.getPorPosicao(i));
@@ -46,7 +51,7 @@ public class App {
             imprimeComposicao(cc.getPorPosicao(i));
         }
 
-        cv.persiste();
+        cv.persiste("VagaoCarga");
         cl.persiste();
         cc.persiste();
 

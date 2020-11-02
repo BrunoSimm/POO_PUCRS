@@ -98,7 +98,7 @@ public class CadastroComposicoes {
                     pos++;
                     int compId = Integer.parseInt(dados[pos]);
                     pos++;
-                    Vagao v = new Vagao(id, cap);
+                    VagaoCarga v = new VagaoCarga(id, cap);
                     c.engataVagao(v);
                 }
                 this.cadastra(c);

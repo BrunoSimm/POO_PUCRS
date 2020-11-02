@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Composicao {
-	private ArrayList<Vagao> vagoes;
+	private ArrayList<VagaoCarga> vagoes;
 	private ArrayList<Locomotiva> locomotivas;
 	private int identificador;
 
@@ -31,7 +31,7 @@ public class Composicao {
 		return vagoes.size();
 	}
 
-	public Vagao getVagao(int posicao) {
+	public VagaoCarga getVagao(int posicao) {
 		if (posicao >= 0 && posicao < vagoes.size()) {
 			return vagoes.get(posicao);
 		} else {
@@ -67,13 +67,13 @@ public class Composicao {
 
 	private double pesoAtualDaComposicao() {
 		double peso = 0.0;
-		for (Vagao v : vagoes) {
+		for (VagaoCarga v : vagoes) {
 			peso += v.getCapacidadeCarga();
 		}
 		return peso;
 	}
 
-	public boolean engataVagao(Vagao vagao) {
+	public boolean engataVagao(VagaoCarga vagao) {
 		if (locomotivas.size() == 0 || vagao.getComposicao() != -1) {
 			return false;
 		} else {
@@ -104,7 +104,7 @@ public class Composicao {
 
 	public boolean desengataVagao() {
 		if (vagoes.size() > 0) {
-			Vagao aux = vagoes.remove(vagoes.size() - 1);
+			VagaoCarga aux = vagoes.remove(vagoes.size() - 1);
 			aux.setComposicao(null);
 			return true;
 		} else {
