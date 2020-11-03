@@ -1,14 +1,28 @@
 import java.util.ArrayList;
 
 public class Composicao {
-	private ArrayList<VagaoCarga> vagoes;
+	private ArrayList<VagaoCarga> vagoesCargas;
+	private ArrayList<VagaoPassageiros> vagoesPassageiros;
 	private ArrayList<Locomotiva> locomotivas;
 	private int identificador;
 
+	public Composicao(int identificador,Locomotiva locomotivaInicial){
+		if(locomotivaInicial != null){
+			this.identificador = identificador;
+			vagoesCargas = new ArrayList<>();
+			vagoesPassageiros = new ArrayList<>();
+			locomotivas = new ArrayList<>();
+			locomotivas.add(locomotivaInicial);
+		} 
+		if(locomotivaInicial == null){
+			throw new NullPointerException();
+		}
+	}
 	public Composicao(int identificador){
-		this.identificador = identificador;
-		vagoes = new ArrayList<>();
-		locomotivas = new ArrayList<>();
+			this.identificador = identificador;
+			vagoesCargas = new ArrayList<>();
+			vagoesPassageiros = new ArrayList<>();
+			locomotivas = new ArrayList<>();
 	}
 
 	public int getIdentificador() {
@@ -28,19 +42,28 @@ public class Composicao {
 	}
 
 	public int getQtdadeVagoes() {
-		return vagoes.size();
+		return vagoesCargas.size() + vagoesPassageiros.size();
 	}
 
-	public VagaoCarga getVagao(int posicao) {
-		if (posicao >= 0 && posicao < vagoes.size()) {
-			return vagoes.get(posicao);
-		} else {
-			return null;
-		}
+	public ElementoDeComposicao getVagao(String tipoDeVagao,int posicao) {
+		if (tipoDeVagao.equals("VagaoCarga")){
+			if (posicao >= 0 && posicao < vagoesCargas.size()) {
+				return vagoesCargas.get(posicao);
+			} else {
+				return null;
+			}
+		} else if(tipoDeVagao.equals("VagaoPassageiros")){
+			if (posicao >= 0 && posicao < vagoesPassageiros.size()) {
+				return vagoesPassageiros.get(posicao);
+			} else {
+				return null;
+			}
+		} else return null;
+		
 	}
 
 	public boolean engataLocomotiva(Locomotiva locomotiva) {
-		if (vagoes.size() != 0 || locomotiva.getComposicao() != -1) {
+		if ((vagoesCargas.size() + vagoesPassageiros.size()) != 0 || locomotiva.getComposicao() != -1) {
 			return false;
 		} else {
 			locomotiva.setComposicao(this);
@@ -67,8 +90,11 @@ public class Composicao {
 
 	private double pesoAtualDaComposicao() {
 		double peso = 0.0;
-		for (VagaoCarga v : vagoes) {
+		for (VagaoCarga v : vagoesCargas) {
 			peso += v.getCapacidadeCarga();
+		}
+		for(VagaoPassageiros p: vagoesPassageiros){
+			peso += p.getQtdPassageiros()*70;
 		}
 		return peso;
 	}
@@ -77,20 +103,35 @@ public class Composicao {
 		if (locomotivas.size() == 0 || vagao.getComposicao() != -1) {
 			return false;
 		} else {
-			if (vagoes.size() < maxVagoesNaComposicao()
+			if ((vagoesCargas.size()+vagoesPassageiros.size()) < maxVagoesNaComposicao()
 					&& pesoAtualDaComposicao() + vagao.getCapacidadeCarga() <= pesoMaxNaComposicao()) {
 				vagao.setComposicao(this);
-				vagoes.add(vagao);
+				vagoesCargas.add(vagao);
 				return true;
 			} else {
 				return false;
 			}
 		}
 	}
+	public boolean engataVagao(VagaoPassageiros vagao){
+		if (locomotivas.size() == 0 || vagao.getComposicao() != -1) {
+			return false;
+		} else {
+			if ((vagoesCargas.size() + vagoesPassageiros.size()) < maxVagoesNaComposicao()
+					&& pesoAtualDaComposicao() + (vagao.getQtdPassageiros()*70) <= pesoMaxNaComposicao()) {
+				vagao.setComposicao(this);
+				vagoesPassageiros.add(vagao);
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+	
 
 	public boolean desengataLocomotiva() {
 		if (locomotivas.size() > 0) {
-			if (vagoes.size() > 0) {
+			if (vagoesCargas.size() > 0 && vagoesPassageiros.size() > 0) {
 				return false;
 			} else {
 				Locomotiva aux = locomotivas.remove(locomotivas.size() - 1);
@@ -103,7 +144,7 @@ public class Composicao {
 	}
 
 	public boolean desengataVagao() {
-		if (vagoes.size() > 0) {
+		if (vagoesCargas.size() + vagoesPassageiros.size() > 0) {
 			VagaoCarga aux = vagoes.remove(vagoes.size() - 1);
 			aux.setComposicao(null);
 			return true;

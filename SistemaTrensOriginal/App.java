@@ -5,7 +5,8 @@ public class App {
             System.out.println(trem.getLocomotiva(i));
         }
         for (int i = 0; i < trem.getQtdadeVagoes(); i++) {
-            System.out.println(trem.getVagao(i));
+            System.out.println(trem.getVagao("VagaoCarga",i));
+            System.out.println(trem.getVagao("VagaoPassageiros",i));
         }
     }
 
@@ -27,31 +28,43 @@ public class App {
                 System.out.println(cv.getPorPosicao("VagaoPassageiros",i).toString());
             }
         System.out.println("Cadastro de locomotivas:");
-        for (int i = 0; i < cl.getQtdade(); i++) {
-            System.out.println(cl.getPorPosicao(i));
-        }
+            for (int i = 0; i < cl.getQtdade(); i++) {
+                System.out.println(cl.getPorPosicao(i));
+            }
 
         // Atencao: este trecho de código foi usado para criar as
         // composicoes que estao no arquivo composicoes.txt
         // Cuidado ao retirar os comentários !!
-        /*
-         * Composicao t1 = new Composicao(6656); t1.engataLocomotiva(cl.getPorId(20));
-         * t1.engataVagao(cv.getPorId(30)); t1.engataVagao(cv.getPorId(40));
-         * t1.engataVagao(cv.getPorId(50)); cc.cadastra(t1);
-         * 
-         * Composicao t2 = new Composicao(9712); t2.engataLocomotiva(cl.getPorId(10));
-         * t2.engataLocomotiva(cl.getPorId(50)); t2.engataVagao(cv.getPorId(100));
-         * t2.engataVagao(cv.getPorId(110)); t2.engataVagao(cv.getPorId(120));
-         * t2.engataVagao(cv.getPorId(130)); t2.engataVagao(cv.getPorId(140));
-         * cc.cadastra(t2);
-         */
-
-        System.out.println("Cadastro de composicoes:");
-        for (int i = 0; i < cc.getQtdade(); i++) {
-            imprimeComposicao(cc.getPorPosicao(i));
+        try{
+            Composicao t1 = new Composicao(6656,cl.getPorId(20));//Associando uma locomotiva incial
+            t1.engataVagao((VagaoCarga)cv.getPorId("VagaoCarga",30)); 
+            t1.engataVagao((VagaoCarga)cv.getPorId("VagaoCarga",40));
+            t1.engataVagao((VagaoCarga)cv.getPorId("VagaoCarga",50)); 
+            cc.cadastra(t1);
+        } catch(NullPointerException e){
+            System.out.println("Locomotiva inicial deve ser diferente de nulo1");
         }
+        try {
+            Composicao t2 = new Composicao(9712,cl.getPorId(10)); //Associando uma locomotiva inicial
+            t2.engataLocomotiva(cl.getPorId(50)); 
+            t2.engataVagao((VagaoCarga)cv.getPorId("VagaoCarga",100));
+            t2.engataVagao((VagaoCarga)cv.getPorId("VagaoCarga",110));
+            t2.engataVagao((VagaoCarga)cv.getPorId("VagaoCarga",120));
+            t2.engataVagao((VagaoCarga)cv.getPorId("VagaoCarga",130));
+            t2.engataVagao((VagaoPassageiros)cv.getPorId("VagaoPassageiros",140));
+            System.out.println(t2.getQtdadeLocomotivas()+ "- "+ t2.getQtdadeVagoes());
+            cc.cadastra(t2);
+        } catch (NullPointerException e) {
+            System.out.println("Locomotiva inicial deve ser diferente de nulo2");
+        }
+        
+        System.out.println("Cadastro de composicoes:");
+            for (int i = 0; i < cc.getQtdade(); i++) {
+                imprimeComposicao(cc.getPorPosicao(i));
+            }
 
         cv.persiste("VagaoCarga");
+        cv.persiste("VagaoPassageiros");
         cl.persiste();
         cc.persiste();
 

@@ -1,4 +1,4 @@
-public class VagaoCarga extends ElementoDeComposicao {
+public class VagaoCarga extends Vagao{
 	private double capacidadeCarga;
 
 	public VagaoCarga(int identificador, double capacidadeCarga) {

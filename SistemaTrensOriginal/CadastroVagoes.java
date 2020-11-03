@@ -9,7 +9,7 @@ import java.util.Scanner;
 //Classe refatorada para aceitar cadastro de vagões de carga e de passageiros. 
 public class CadastroVagoes {
 	private ArrayList<VagaoCarga> vagoesCarga;
-	private ArrayList<ElementoDeComposicao> vagoesPassageiros;
+	private ArrayList<VagaoPassageiros> vagoesPassageiros;
 
 	public CadastroVagoes(){
 		vagoesCarga = new ArrayList<>();
@@ -50,14 +50,14 @@ public class CadastroVagoes {
 	}
 	public ElementoDeComposicao getPorId(String tipoDeVagao,int id){
 		if(tipoDeVagao.equals("VagaoPassageiros")){
-			for(ElementoDeComposicao vagao:vagoesPassageiros){
+			for(VagaoPassageiros vagao:vagoesPassageiros){
 				if (vagao.getIdentificador() == id){
 					return vagao;
 				}
 			}
 			return null;
 		} else if (tipoDeVagao.equals("VagaoCarga")){
-			for(ElementoDeComposicao vagao:vagoesCarga){
+			for(VagaoCarga vagao:vagoesCarga){
 				if (vagao.getIdentificador() == id){
 					return vagao;
 				}
@@ -107,7 +107,18 @@ public class CadastroVagoes {
 
 	public void persiste(String tipoDeVagao){
 		if(tipoDeVagao.equals("VagaoPassageiros")){ //Fazer implementação para Passageiros
-
+			String fName = "./vagoesPassageiro.txt";
+			Path path = Paths.get(fName);
+			try (PrintWriter writer = new PrintWriter(Files.newBufferedWriter(path, StandardCharsets.UTF_8))){
+			for(VagaoPassageiros vagao:vagoesPassageiros){
+					String linha = vagao.getIdentificador()+","+
+						vagao.getQtdPassageiros()+","+
+						vagao.getComposicao();
+					writer.println(linha);
+				}
+			}catch (IOException x){
+			System.err.format("Erro de E/S: %s%n", x);
+			}
 		}else if (tipoDeVagao.equals("VagaoCarga")){
 			String fName = "./vagoesCarga.txt";
 			Path path = Paths.get(fName);

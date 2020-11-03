@@ -1,4 +1,4 @@
-public class VagaoPassageiros extends ElementoDeComposicao {
+public class VagaoPassageiros extends Vagao {
     private int qtdPassageiros;
     private double pesoVagao;
 
