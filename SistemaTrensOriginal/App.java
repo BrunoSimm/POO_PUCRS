@@ -6,7 +6,7 @@ public class App {
         }
         for (int i = 0; i < trem.getQtdadeVagoes(); i++) {
             System.out.println(trem.getVagao("VagaoCarga",i));
-            System.out.println(trem.getVagao("VagaoPassageiros",i));
+            System.out.println(trem.getVagao("VagaoCarga",i));
         }
     }
 

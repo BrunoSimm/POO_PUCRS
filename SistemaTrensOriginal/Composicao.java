@@ -1,28 +1,25 @@
 import java.util.ArrayList;
 
 public class Composicao {
-	private ArrayList<VagaoCarga> vagoesCargas;
-	private ArrayList<VagaoPassageiros> vagoesPassageiros;
-	private ArrayList<Locomotiva> locomotivas;
+	//private ArrayList<VagaoCarga> vagoesCargas;
+	//private ArrayList<VagaoPassageiros> vagoesPassageiros;
+	//private ArrayList<Locomotiva> locomotivas;
+	private ArrayList<ElementoDeComposicao> elementosComposicao;
 	private int identificador;
 
-	public Composicao(int identificador,Locomotiva locomotivaInicial){
+	public Composicao(int identificador,Locomotiva locomotivaInicial){//Utilizado na criação de novas composições
 		if(locomotivaInicial != null){
 			this.identificador = identificador;
-			vagoesCargas = new ArrayList<>();
-			vagoesPassageiros = new ArrayList<>();
-			locomotivas = new ArrayList<>();
-			locomotivas.add(locomotivaInicial);
+			elementosComposicao = new ArrayList<>();
+			elementosComposicao.add(locomotivaInicial);
 		} 
 		if(locomotivaInicial == null){
 			throw new NullPointerException();
 		}
 	}
-	public Composicao(int identificador){
+	public Composicao(int identificador){ //Utilizado apenas no momento de carregar os arquivos.
 			this.identificador = identificador;
-			vagoesCargas = new ArrayList<>();
-			vagoesPassageiros = new ArrayList<>();
-			locomotivas = new ArrayList<>();
+			elementosComposicao = new ArrayList<>();
 	}
 
 	public int getIdentificador() {
@@ -30,31 +27,45 @@ public class Composicao {
 	}
 
 	public int getQtdadeLocomotivas() {
-		return locomotivas.size();
+		int cont = 0;
+		for (ElementoDeComposicao elemento: elementosComposicao){
+			if(elemento.getClass().getName().equals("Locomotiva")){
+				cont++;
+			}
+		}
+		return cont;
 	}
 
-	public Locomotiva getLocomotiva(int posicao) {
-		if (posicao >= 0 && posicao < locomotivas.size()) {
-			return locomotivas.get(posicao);
-		} else {
-			return null;
+	public ElementoDeComposicao getLocomotiva(int identificador){
+		for (ElementoDeComposicao elemento: elementosComposicao){
+			if(elemento.getIdentificador() == identificador){
+				return elemento;
+			}
 		}
+		return null;
 	}
 
 	public int getQtdadeVagoes() {
-		return vagoesCargas.size() + vagoesPassageiros.size();
+		int cont = 0;
+		for (ElementoDeComposicao elemento: elementosComposicao){
+			if(elemento.getClass().getName().contains("Vagao")){
+				System.out.println("Encontrei no contains na Composicao");
+				cont++;
+			}
+		}
+		return cont;
 	}
 
 	public ElementoDeComposicao getVagao(String tipoDeVagao,int posicao) {
 		if (tipoDeVagao.equals("VagaoCarga")){
-			if (posicao >= 0 && posicao < vagoesCargas.size()) {
-				return vagoesCargas.get(posicao);
+			if (posicao >= 0 && posicao < elementosComposicao.size()) {
+				return elementosComposicao.get(posicao);
 			} else {
 				return null;
 			}
 		} else if(tipoDeVagao.equals("VagaoPassageiros")){
-			if (posicao >= 0 && posicao < vagoesPassageiros.size()) {
-				return vagoesPassageiros.get(posicao);
+			if (posicao >= 0 && posicao < elementosComposicao.size()) {
+				return elementosComposicao.get(posicao);
 			} else {
 				return null;
 			}
@@ -107,6 +118,7 @@ public class Composicao {
 					&& pesoAtualDaComposicao() + vagao.getCapacidadeCarga() <= pesoMaxNaComposicao()) {
 				vagao.setComposicao(this);
 				vagoesCargas.add(vagao);
+				componentesTrem.add(vagao);
 				return true;
 			} else {
 				return false;
