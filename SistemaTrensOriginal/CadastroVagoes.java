@@ -48,9 +48,10 @@ public class CadastroVagoes {
 			return null;
 		}
 	}
-	public ElementoDeComposicao getPorId(String tipoDeVagao,int id){
+	public Vagao getPorId(String tipoDeVagao,int id){
 		if(tipoDeVagao.equals("VagaoPassageiros")){
 			for(VagaoPassageiros vagao:vagoesPassageiros){
+				System.out.println(vagao.getIdentificador());
 				if (vagao.getIdentificador() == id){
 					return vagao;
 				}

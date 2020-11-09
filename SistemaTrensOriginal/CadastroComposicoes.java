@@ -15,6 +15,7 @@ public class CadastroComposicoes {
     }
 
     public void cadastra(Composicao c) {
+        System.out.println("Adicionei uma nova composição");
         composicoes.add(c);
     }
 

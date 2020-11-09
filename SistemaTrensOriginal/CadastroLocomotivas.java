@@ -33,7 +33,6 @@ public class CadastroLocomotivas {
 	public Locomotiva getPorId(int id) {
 		for (Locomotiva locomotiva : locomotivas) {
 			if (locomotiva.getIdentificador() == id) {
-				System.out.println("ENCONTREI A LOCOMOTIVA");
 				return locomotiva;
 			}
 		}

@@ -1,17 +1,15 @@
 import java.util.ArrayList;
 
 public class Composicao {
-	//private ArrayList<VagaoCarga> vagoesCargas;
-	//private ArrayList<VagaoPassageiros> vagoesPassageiros;
-	//private ArrayList<Locomotiva> locomotivas;
 	private ArrayList<ElementoDeComposicao> elementosComposicao;
 	private int identificador;
 
 	public Composicao(int identificador,Locomotiva locomotivaInicial){//Utilizado na criação de novas composições
-		if(locomotivaInicial != null){
+		if(locomotivaInicial != null && locomotivaInicial.getComposicao() == -1){
 			this.identificador = identificador;
 			elementosComposicao = new ArrayList<>();
 			elementosComposicao.add(locomotivaInicial);
+			locomotivaInicial.setComposicao(this);
 		} 
 		if(locomotivaInicial == null){
 			throw new NullPointerException();
@@ -49,7 +47,6 @@ public class Composicao {
 		int cont = 0;
 		for (ElementoDeComposicao elemento: elementosComposicao){
 			if(elemento.getClass().getName().contains("Vagao")){
-				System.out.println("Encontrei no contains na Composicao");
 				cont++;
 			}
 		}
@@ -76,7 +73,7 @@ public class Composicao {
 	public boolean engataLocomotiva(Locomotiva locomotiva) {
 		if (locomotiva.getComposicao() != -1) {
 			return false;
-		} else if (elementosComposicao.get(elementosComposicao.size()).getClass().getName().contains("Vagao")){ //Já existe um vagão conectado na ultima posição do array, impedindo conexão de uma locomotiva.
+		} else if (elementosComposicao.get(elementosComposicao.size()-1).getClass().getName().contains("Vagao")){ //Já existe um vagão conectado na ultima posição do array, impedindo conexão de uma locomotiva.
 			return false;
 		} else {
 			locomotiva.setComposicao(this);
@@ -112,11 +109,10 @@ public class Composicao {
 	private double pesoAtualDaComposicao() {
 		double peso = 0.0;
 		for (ElementoDeComposicao elemento : elementosComposicao) {
-			if (elemento.getClass().getName() == "Locomotiva"){
-				peso += ((Locomotiva)elemento).getPesoMaximo();
-			} else if (elemento.getClass().getName() == "VagaoCarga"){
+			if (elemento.getClass().getName() == "VagaoCarga"){
 				peso += ((VagaoCarga)elemento).getCapacidadeCarga();
-			} else {
+			} 
+			if (elemento.getClass().getName() == "VagaoPassageiros"){
 				peso += ((VagaoPassageiros)elemento).getPesoVagao();
 			}
 		}
@@ -129,12 +125,17 @@ public class Composicao {
 		} else {
 			if (elementosComposicao.size() < maxVagoesNaComposicao()){
 				if (vagao.getClass().getName().contains("VagaoCarga")){
+					System.out.println(((VagaoCarga)vagao).getCapacidadeCarga());
 					if(pesoAtualDaComposicao() + ((VagaoCarga)vagao).getCapacidadeCarga() <= 			pesoMaxNaComposicao()){
 						vagao.setComposicao(this);
 						elementosComposicao.add(vagao);
 						return true;
 					} else return false;
 				} else {
+					System.out.println("Entrei no Passageiros");
+					System.out.println(pesoAtualDaComposicao());
+					System.out.println(((VagaoPassageiros)vagao).getPesoVagao());
+					System.out.println(pesoMaxNaComposicao());
 					if(pesoAtualDaComposicao() + ((VagaoPassageiros)vagao).getPesoVagao() <= 			pesoMaxNaComposicao()){
 						vagao.setComposicao(this);
 						elementosComposicao.add(vagao);
@@ -142,6 +143,7 @@ public class Composicao {
 					} else return false;
 				}
 			} else {
+				System.out.println("DEU MUITA MERDA");
 				return false;
 			}
 		}
@@ -176,9 +178,11 @@ public class Composicao {
 		String aux = "";
 		aux += this.getIdentificador() +",";
 		aux += this.getQtdadeLocomotivas()+",";
-		for(int i=0;i<this.getQtdadeLocomotivas();i++){
-			aux += this.getLocomotiva(i).toLineFile()+",";
-		}
+			for (ElementoDeComposicao elemento: elementosComposicao){
+				if (elemento.getClass().getName().equals("Locomotiva")){
+					aux += elemento.toLineFile()+",";
+				}
+			}
 		aux += this.getQtdadeVagoes()+",";
 		for(int i=0;i<this.getQtdadeVagoes();i++){
 			aux += this.getVagao("VagaoCarga",i).toLineFile();
@@ -187,5 +191,10 @@ public class Composicao {
 			}
 		}
 		return aux;
+	}
+
+	@Override
+	public String toString() {
+		return "Composicao [elementosComposicao=" + elementosComposicao + ", identificador=" + identificador + "]";
 	}
 }
