@@ -22,6 +22,25 @@ public class CadastroVagoes {
 	public void cadastraVagaoPassageiros(VagaoPassageiros v){
 		vagoesPassageiros.add(v);
 	}
+	public ArrayList<Vagao> getPorComposicao(int composicao){
+		ArrayList<Vagao> temp = new ArrayList<Vagao>();
+		temp.addAll(vagoesCarga);
+		temp.addAll(vagoesPassageiros); //Unificar os arrays de vagoes
+
+		ArrayList<Vagao> aux = new ArrayList<Vagao>();
+		for (Vagao vagao: temp){
+			if (vagao.getComposicao()== composicao){
+				aux.add(vagao);
+			}
+		}
+		if(aux.isEmpty()){
+			return null; //DEVE-SE TRATAR NA COMPOSIÇÃO
+		} else{
+			return aux;
+		}
+	}
+
+	
 
 	public int getQtdade(String tipoDeVagao){
 		if(tipoDeVagao.equals("VagaoPassageiros")){

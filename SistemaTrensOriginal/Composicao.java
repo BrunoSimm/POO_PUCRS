@@ -81,6 +81,17 @@ public class Composicao {
 			return true;
 		}
 	}
+	
+	public boolean insereLocomotivas(Locomotiva locomotiva){
+		elementosComposicao.add(locomotiva);
+		return true;
+	}
+
+	public boolean insereVagao(Vagao vagao){
+		elementosComposicao.add(vagao);
+		return true;
+	}
+
 
 	private int maxVagoesNaComposicao() {
 		int qtdade = 0;
@@ -176,20 +187,7 @@ public class Composicao {
 
 	public String toLineFile(){
 		String aux = "";
-		aux += this.getIdentificador() +",";
-		aux += this.getQtdadeLocomotivas()+",";
-			for (ElementoDeComposicao elemento: elementosComposicao){
-				if (elemento.getClass().getName().equals("Locomotiva")){
-					aux += elemento.toLineFile()+",";
-				}
-			}
-		aux += this.getQtdadeVagoes()+",";
-		for(int i=0;i<this.getQtdadeVagoes();i++){
-			aux += this.getVagao("VagaoCarga",i).toLineFile();
-			if (i<this.getQtdadeVagoes()-1){
-				aux += ",";
-			}
-		}
+		aux += this.getIdentificador();
 		return aux;
 	}
 

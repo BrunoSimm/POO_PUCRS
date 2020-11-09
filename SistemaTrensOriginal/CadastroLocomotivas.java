@@ -30,6 +30,20 @@ public class CadastroLocomotivas {
 		}
 	}
 
+	public ArrayList<Locomotiva> getPorComposicao(int composicao){
+		ArrayList<Locomotiva> aux = new ArrayList<Locomotiva>();
+		for (Locomotiva locomotiva: locomotivas){
+			if (locomotiva.getComposicao()== composicao){
+				aux.add(locomotiva);
+			}
+		}
+		if(aux.isEmpty()){
+			return null; //DEVE-SE TRATAR NA COMPOSIÇÃO
+		} else{
+			return aux;
+		}
+	}
+
 	public Locomotiva getPorId(int id) {
 		for (Locomotiva locomotiva : locomotivas) {
 			if (locomotiva.getIdentificador() == id) {

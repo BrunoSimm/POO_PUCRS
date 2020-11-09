@@ -15,8 +15,25 @@ public class CadastroComposicoes {
     }
 
     public void cadastra(Composicao c) {
-        System.out.println("Adicionei uma nova composição");
         composicoes.add(c);
+    }
+
+    public void alimentaComposicoes(CadastroLocomotivas cl, CadastroVagoes cv){
+        for (Composicao composicao : composicoes) {
+            ArrayList<Locomotiva> aux = new ArrayList<Locomotiva>();
+            aux = cl.getPorComposicao(composicao.getIdentificador());
+            for (Locomotiva locomotiva : aux) {
+                composicao.insereLocomotivas(locomotiva);
+            }
+        }
+
+        for (Composicao composicao : composicoes) {
+            ArrayList<Vagao> aux = new ArrayList<Vagao>();
+            aux = cv.getPorComposicao(composicao.getIdentificador());
+            for (Vagao vagao : aux) {
+                composicao.insereVagao(vagao);
+            }
+        }
     }
 
     public int getQtdade() {
@@ -75,33 +92,6 @@ public class CadastroComposicoes {
                 int pos = 0;
                 int identificador = Integer.parseInt(dados[pos]);
                 Composicao c = new Composicao(identificador);
-                pos++;
-                int qtdadeLoc = Integer.parseInt(dados[pos]);
-                pos++;
-                for (int i = 0; i < qtdadeLoc; i++) {
-                    int id = Integer.parseInt(dados[pos]);
-                    pos++;
-                    double peso = Double.parseDouble(dados[pos]);
-                    pos++;
-                    int qtdade = Integer.parseInt(dados[pos]);
-                    pos++;
-                    int compId = Integer.parseInt(dados[pos]);
-                    pos++;
-                    Locomotiva l = new Locomotiva(id, peso, qtdade, compId);
-                    c.engataLocomotiva(l);
-                }
-                int qtdadeVagoes = Integer.parseInt(dados[pos]);
-                pos++;
-                for (int i = 0; i < qtdadeVagoes; i++) {
-                    int id = Integer.parseInt(dados[pos]);
-                    pos++;
-                    double cap = Double.parseDouble(dados[pos]);
-                    pos++;
-                    int compId = Integer.parseInt(dados[pos]);
-                    pos++;
-                    VagaoCarga v = new VagaoCarga(id, cap);
-                    c.engataVagao(v);
-                }
                 this.cadastra(c);
             }
         } catch (IOException x) {
