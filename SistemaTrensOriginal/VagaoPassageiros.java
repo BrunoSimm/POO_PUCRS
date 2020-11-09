@@ -6,7 +6,7 @@ public class VagaoPassageiros extends Vagao {
         this.composicao = composicao;
         this.identificador = identificador;
         this.qtdPassageiros = qtdPassageiros;
-        this.pesoVagao = pesoVagao;
+        this.pesoVagao = qtdPassageiros * 70;
     }
 
     @Override

@@ -74,66 +74,73 @@ public class Composicao {
 	}
 
 	public boolean engataLocomotiva(Locomotiva locomotiva) {
-		if ((vagoesCargas.size() + vagoesPassageiros.size()) != 0 || locomotiva.getComposicao() != -1) {
+		if (locomotiva.getComposicao() != -1) {
+			return false;
+		} else if (elementosComposicao.get(elementosComposicao.size()).getClass().getName().contains("Vagao")){ //Já existe um vagão conectado na ultima posição do array, impedindo conexão de uma locomotiva.
 			return false;
 		} else {
 			locomotiva.setComposicao(this);
-			locomotivas.add(locomotiva);
+			elementosComposicao.add(locomotiva);
 			return true;
 		}
 	}
 
 	private int maxVagoesNaComposicao() {
 		int qtdade = 0;
-		for (Locomotiva l : locomotivas) {
-			qtdade += l.getQtdadeMaxVagoes();
+		int qtdLomotivasComposicao = 0;
+		for (ElementoDeComposicao elemento : elementosComposicao) {
+			if (elemento.getClass().getName() == "Locomotiva"){
+				qtdade += ((Locomotiva)elemento).getQtdadeMaxVagoes();
+				qtdLomotivasComposicao++;
+			}
 		}
-		return (int) (qtdade * (1 - (0.1 * locomotivas.size())));
+		return (int) (qtdade * (1 - (0.1 * qtdLomotivasComposicao)));
 	}
 
 	private double pesoMaxNaComposicao() {
 		double peso = 0.0;
-		for (Locomotiva l : locomotivas) {
-			peso += l.getPesoMaximo();
+		int qtdLomotivasComposicao = 0;
+		for (ElementoDeComposicao elemento : elementosComposicao) {
+			if (elemento.getClass().getName() == "Locomotiva"){
+				peso += ((Locomotiva)elemento).getPesoMaximo();
+				qtdLomotivasComposicao++;
+			}
 		}
-		return (int) (peso * (1 - (0.1 * locomotivas.size())));
+		return (int) (peso * (1 - (0.1 * qtdLomotivasComposicao)));
 	}
 
 	private double pesoAtualDaComposicao() {
 		double peso = 0.0;
-		for (VagaoCarga v : vagoesCargas) {
-			peso += v.getCapacidadeCarga();
-		}
-		for(VagaoPassageiros p: vagoesPassageiros){
-			peso += p.getQtdPassageiros()*70;
+		for (ElementoDeComposicao elemento : elementosComposicao) {
+			if (elemento.getClass().getName() == "Locomotiva"){
+				peso += ((Locomotiva)elemento).getPesoMaximo();
+			} else if (elemento.getClass().getName() == "VagaoCarga"){
+				peso += ((VagaoCarga)elemento).getCapacidadeCarga();
+			} else {
+				peso += ((VagaoPassageiros)elemento).getPesoVagao();
+			}
 		}
 		return peso;
 	}
 
-	public boolean engataVagao(VagaoCarga vagao) {
-		if (locomotivas.size() == 0 || vagao.getComposicao() != -1) {
+	public boolean engataVagao(Vagao vagao) {
+		if (elementosComposicao.size() == 0 || vagao.getComposicao() != -1) {
 			return false;
 		} else {
-			if ((vagoesCargas.size()+vagoesPassageiros.size()) < maxVagoesNaComposicao()
-					&& pesoAtualDaComposicao() + vagao.getCapacidadeCarga() <= pesoMaxNaComposicao()) {
-				vagao.setComposicao(this);
-				vagoesCargas.add(vagao);
-				componentesTrem.add(vagao);
-				return true;
-			} else {
-				return false;
-			}
-		}
-	}
-	public boolean engataVagao(VagaoPassageiros vagao){
-		if (locomotivas.size() == 0 || vagao.getComposicao() != -1) {
-			return false;
-		} else {
-			if ((vagoesCargas.size() + vagoesPassageiros.size()) < maxVagoesNaComposicao()
-					&& pesoAtualDaComposicao() + (vagao.getQtdPassageiros()*70) <= pesoMaxNaComposicao()) {
-				vagao.setComposicao(this);
-				vagoesPassageiros.add(vagao);
-				return true;
+			if (elementosComposicao.size() < maxVagoesNaComposicao()){
+				if (vagao.getClass().getName().contains("VagaoCarga")){
+					if(pesoAtualDaComposicao() + ((VagaoCarga)vagao).getCapacidadeCarga() <= 			pesoMaxNaComposicao()){
+						vagao.setComposicao(this);
+						elementosComposicao.add(vagao);
+						return true;
+					} else return false;
+				} else {
+					if(pesoAtualDaComposicao() + ((VagaoPassageiros)vagao).getPesoVagao() <= 			pesoMaxNaComposicao()){
+						vagao.setComposicao(this);
+						elementosComposicao.add(vagao);
+						return true;
+					} else return false;
+				}
 			} else {
 				return false;
 			}
@@ -142,11 +149,11 @@ public class Composicao {
 	
 
 	public boolean desengataLocomotiva() {
-		if (locomotivas.size() > 0) {
-			if (vagoesCargas.size() > 0 && vagoesPassageiros.size() > 0) {
+		if (elementosComposicao.size() > 0) {
+			if (elementosComposicao.get(elementosComposicao.size()).getClass().getName().contains("Vagao")){
 				return false;
 			} else {
-				Locomotiva aux = locomotivas.remove(locomotivas.size() - 1);
+				ElementoDeComposicao aux = elementosComposicao.remove(elementosComposicao.size() - 1);
 				aux.setComposicao(null);
 				return true;
 			}
@@ -156,8 +163,8 @@ public class Composicao {
 	}
 
 	public boolean desengataVagao() {
-		if (vagoesCargas.size() + vagoesPassageiros.size() > 0) {
-			VagaoCarga aux = vagoes.remove(vagoes.size() - 1);
+		if (elementosComposicao.get(elementosComposicao.size()).getClass().getName().contains("Vagao")){
+			ElementoDeComposicao aux = elementosComposicao.remove(elementosComposicao.size() - 1);
 			aux.setComposicao(null);
 			return true;
 		} else {
@@ -174,7 +181,7 @@ public class Composicao {
 		}
 		aux += this.getQtdadeVagoes()+",";
 		for(int i=0;i<this.getQtdadeVagoes();i++){
-			aux += this.getVagao(i).toLineFile();
+			aux += this.getVagao("VagaoCarga",i).toLineFile();
 			if (i<this.getQtdadeVagoes()-1){
 				aux += ",";
 			}
