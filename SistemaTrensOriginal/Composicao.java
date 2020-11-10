@@ -136,17 +136,12 @@ public class Composicao {
 		} else {
 			if (elementosComposicao.size() < maxVagoesNaComposicao()){
 				if (vagao.getClass().getName().contains("VagaoCarga")){
-					System.out.println(((VagaoCarga)vagao).getCapacidadeCarga());
 					if(pesoAtualDaComposicao() + ((VagaoCarga)vagao).getCapacidadeCarga() <= 			pesoMaxNaComposicao()){
 						vagao.setComposicao(this);
 						elementosComposicao.add(vagao);
 						return true;
 					} else return false;
 				} else {
-					System.out.println("Entrei no Passageiros");
-					System.out.println(pesoAtualDaComposicao());
-					System.out.println(((VagaoPassageiros)vagao).getPesoVagao());
-					System.out.println(pesoMaxNaComposicao());
 					if(pesoAtualDaComposicao() + ((VagaoPassageiros)vagao).getPesoVagao() <= 			pesoMaxNaComposicao()){
 						vagao.setComposicao(this);
 						elementosComposicao.add(vagao);
@@ -154,7 +149,6 @@ public class Composicao {
 					} else return false;
 				}
 			} else {
-				System.out.println("DEU MUITA MERDA");
 				return false;
 			}
 		}

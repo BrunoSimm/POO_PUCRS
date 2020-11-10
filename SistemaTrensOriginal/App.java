@@ -24,6 +24,12 @@ public class App {
 
         cc.alimentaComposicoes(cl,cv); //Adiciona nas suas respectivas composições as locomotivas e vagoes.
 
+        System.out.println(cc.getPorPosicao(1).engataVagao(cv.getPorId("VagaoCarga",70))); //Adicionando novo vagão em uma composição já criada. 
+        System.out.println(cv.getPorId("VagaoCarga", 70));
+        
+        System.out.println(cc.getPorPosicao(0).engataLocomotiva(cl.getPorId(30))); //Tentando adicionar uma nova locomotiva em uma composição já criada.
+
+
         System.out.println("\nCadastro de Vagoes de Carga:");
             for (int i = 0; i < cv.getQtdade("VagaoCarga"); i++) {
                 System.out.println("\t"+cv.getPorPosicao("VagaoCarga",i).toString());

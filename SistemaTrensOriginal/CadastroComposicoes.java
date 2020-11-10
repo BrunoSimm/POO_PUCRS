@@ -17,7 +17,10 @@ public class CadastroComposicoes {
     public void cadastra(Composicao c) {
         composicoes.add(c);
     }
-
+    /**
+     * "Monta" novamente as composições. Isso permite adicionar/remover novos vagões e locomotivas.
+     * 
+    */
     public void alimentaComposicoes(CadastroLocomotivas cl, CadastroVagoes cv){
         for (Composicao composicao : composicoes) {
             ArrayList<Locomotiva> aux = new ArrayList<Locomotiva>();
