@@ -22,19 +22,19 @@ public class CadastroVagoes {
 	public void cadastraVagaoPassageiros(VagaoPassageiros v){
 		vagoesPassageiros.add(v);
 	}
-	public ArrayList<Vagao> getPorComposicao(int composicao){
+	public ArrayList<Vagao> getPorComposicao(int identificadorComposicao){
 		ArrayList<Vagao> temp = new ArrayList<Vagao>();
 		temp.addAll(vagoesCarga);
 		temp.addAll(vagoesPassageiros); //Unificar os arrays de vagoes
 
 		ArrayList<Vagao> aux = new ArrayList<Vagao>();
 		for (Vagao vagao: temp){
-			if (vagao.getComposicao()== composicao){
+			if (vagao.getComposicao()== identificadorComposicao){
 				aux.add(vagao);
 			}
 		}
 		if(aux.isEmpty()){
-			return null; //DEVE-SE TRATAR NA COMPOSIÇÃO
+			return null;
 		} else{
 			return aux;
 		}
@@ -70,7 +70,6 @@ public class CadastroVagoes {
 	public Vagao getPorId(String tipoDeVagao,int id){
 		if(tipoDeVagao.equals("VagaoPassageiros")){
 			for(VagaoPassageiros vagao:vagoesPassageiros){
-				System.out.println(vagao.getIdentificador());
 				if (vagao.getIdentificador() == id){
 					return vagao;
 				}

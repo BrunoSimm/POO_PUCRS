@@ -18,10 +18,11 @@ public class CadastroComposicoes {
         composicoes.add(c);
     }
     /**
-     * "Monta" novamente as composições. Isso permite adicionar/remover novos vagões e locomotivas.
+     * "Monta" novamente as composições. Isso permite adicionar/remover novos vagões e locomotivas de composições já criadas.
      * 
     */
     public void alimentaComposicoes(CadastroLocomotivas cl, CadastroVagoes cv){
+        //Lendo todas as locomotivas e associando as respectivas composições.
         for (Composicao composicao : composicoes) {
             ArrayList<Locomotiva> aux = new ArrayList<Locomotiva>();
             aux = cl.getPorComposicao(composicao.getIdentificador());
@@ -30,9 +31,14 @@ public class CadastroComposicoes {
             }
         }
 
+        //Lendo todas os vagoes (carga e passageiros) e associando as respectivas composições.
         for (Composicao composicao : composicoes) {
             ArrayList<Vagao> aux = new ArrayList<Vagao>();
+            
             aux = cv.getPorComposicao(composicao.getIdentificador());
+            if (aux.isEmpty()){
+                
+            }
             for (Vagao vagao : aux) {
                 composicao.insereVagao(vagao);
             }
@@ -60,9 +66,13 @@ public class CadastroComposicoes {
         return null;
     }
 
-    public boolean removePorId(int id) {
+    public boolean removeComposicaoPorId(int id) {
         for (Composicao c : composicoes) {
             if (c.getIdentificador() == id) {
+                //Removendo os elementos da composição e editando suas composições.
+                for (int i = 0; i < (c.getQtdadeLocomotivas()+c.getQtdadeVagoes()); i++) {
+                    c.removerUltimoElemento();
+                }
                 composicoes.remove(c);
                 return true;
             }

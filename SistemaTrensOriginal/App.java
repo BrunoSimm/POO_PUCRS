@@ -1,3 +1,8 @@
+/**
+ * Atenção: A leitura e gravação das composições foram modificadas. O arquivo composicoes.txt recebe apenas 
+ * o identificador de cada composição. Como em locomotivas.txt e vagoesCarga.txt e vagoesPassageiros.txt temos a informação de qual composição cada um destes elementos pertence, desenvolvi o método em Cadastro de Composições chamado "alimentaComposicoes(cl,cv)". 
+ * Este método irá varrer todas as locomotivas e todos os vagões e então associar estes elementos a sua respectiva composição.
+*/
 public class App {
     private static void imprimeComposicao(Composicao trem) {
         System.out.println("\tComposicao: " + trem.getIdentificador());
@@ -24,17 +29,28 @@ public class App {
 
         cc.alimentaComposicoes(cl,cv); //Adiciona nas suas respectivas composições as locomotivas e vagoes.
 
-        System.out.println(cc.getPorPosicao(1).engataVagao(cv.getPorId("VagaoCarga",70))); //Adicionando novo vagão em uma composição já criada. 
-        System.out.println(cv.getPorId("VagaoCarga", 70));
-        
-        System.out.println(cc.getPorPosicao(0).engataLocomotiva(cl.getPorId(30))); //Tentando adicionar uma nova locomotiva em uma composição já criada.
+        //Realizando testes de inserção, eliminação e edição de elementos em composições.
 
+        //Adicionando novo vagão de carga em uma composição já criada. 
+        System.out.println("Teste de inserção de Vagão de Carga: "+cc.getPorIdentificador(6656).engataVagao(cv.getPorId("VagaoCarga",70))+".\nStatus do vagão: "+cv.getPorId("VagaoCarga", 70)); 
 
-        System.out.println("\nCadastro de Vagoes de Carga:");
+        //Adicionando novo vagão de passageiros em uma composição já criada. 
+        System.out.println("\nTeste de inserção de Vagão de Passageiros: "+cc.getPorIdentificador(6656).engataVagao(cv.getPorId("VagaoPassageiros",71))+".\nStatus do vagão: "+cv.getPorId("VagaoPassageiros",71));
+
+        //Inserir locomotiva em Composição já criada.
+        System.out.println("\nTeste de inserção de Locomotiva: "+cc.getPorIdentificador(6656).engataLocomotiva(cl.getPorId(30))+".\nStatus da Locomotiva: "+cl.getPorId(30));
+
+        //Removendo ultimo elemento da composição
+        System.out.println("\nTeste de remoção de ultimo elemento.\n\tNumero de vagões antes da remoção: "+cc.getPorIdentificador(9712).getQtdadeVagoes()+
+        ".\n\tRemovendo ultimo elemento.Resultado: "+cc.getPorIdentificador(9712).removerUltimoElemento()+
+        ".\n\tNumero de vagões depois da remoção:"+cc.getPorIdentificador(9712).getQtdadeVagoes()+".");
+
+        //Listar locomotivas e vagões livres/ocupadas
+        System.out.println("\nCadastro de Vagões de Carga:");
             for (int i = 0; i < cv.getQtdade("VagaoCarga"); i++) {
                 System.out.println("\t"+cv.getPorPosicao("VagaoCarga",i).toString());
             }
-        System.out.println("\nCadastro de Vagoes de Passageiros:");
+        System.out.println("\nCadastro de Vagões de Passageiros:");
             for (int i = 0; i < cv.getQtdade("VagaoPassageiros"); i++) {
                 System.out.println("\t"+cv.getPorPosicao("VagaoPassageiros",i).toString());
             }

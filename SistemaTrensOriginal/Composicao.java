@@ -81,7 +81,12 @@ public class Composicao {
 			return true;
 		}
 	}
-	
+	/**
+	 * Este método é utilizado apenas para associação da locomotiva a uma composição já existente.
+	 * Utilizado no método "alimentaComposicoes()" da classe CadastroComposicoes.
+	 * @param locomotiva
+	 * @return boolean t/f
+	*/
 	public boolean insereLocomotivas(Locomotiva locomotiva){
 		elementosComposicao.add(locomotiva);
 		return true;
@@ -140,13 +145,15 @@ public class Composicao {
 						vagao.setComposicao(this);
 						elementosComposicao.add(vagao);
 						return true;
-					} else return false;
+					} else {
+						return false;}
 				} else {
 					if(pesoAtualDaComposicao() + ((VagaoPassageiros)vagao).getPesoVagao() <= 			pesoMaxNaComposicao()){
 						vagao.setComposicao(this);
 						elementosComposicao.add(vagao);
 						return true;
-					} else return false;
+					} else {
+						return false;}
 				}
 			} else {
 				return false;
@@ -177,6 +184,17 @@ public class Composicao {
 		} else {
 			return false;
 		}
+	}
+
+	public boolean removerUltimoElemento(){
+		if(elementosComposicao.isEmpty()){
+			return false;
+		} else{
+			elementosComposicao.get(elementosComposicao.size()-1).setComposicao(null);
+			elementosComposicao.remove(elementosComposicao.size()-1);
+			return true;
+		}
+		
 	}
 
 	public String toLineFile(){
