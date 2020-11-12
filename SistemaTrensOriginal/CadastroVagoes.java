@@ -89,7 +89,7 @@ public class CadastroVagoes {
 
 	public void carrega(String tipoDeVagao){
 		if(tipoDeVagao.equals("VagaoPassageiros")){ //Fazer implementação para Passageiros
-			String fName = "./vagoesPassageiro.txt";
+			String fName = "./Dados/vagoesPassageiro.txt";
 			Path path = Paths.get(fName);
 			try (Scanner sc = new Scanner(Files.newBufferedReader(path, StandardCharsets.UTF_8))){
 			   while (sc.hasNext()){
@@ -106,7 +106,7 @@ public class CadastroVagoes {
 				System.err.format("Erro de E/S: %s%n", x);
 			}
 		}else if (tipoDeVagao.equals("VagaoCarga")){
-			String fName = "./vagoesCarga.txt";
+			String fName = "./Dados/vagoesCarga.txt";
 			Path path = Paths.get(fName);
 			try (Scanner sc = new Scanner(Files.newBufferedReader(path, StandardCharsets.UTF_8))){
 			   while (sc.hasNext()){
@@ -126,7 +126,7 @@ public class CadastroVagoes {
 
 	public void persiste(String tipoDeVagao){
 		if(tipoDeVagao.equals("VagaoPassageiros")){ //Fazer implementação para Passageiros
-			String fName = "./vagoesPassageiro.txt";
+			String fName = "./Dados/vagoesPassageiro.txt";
 			Path path = Paths.get(fName);
 			try (PrintWriter writer = new PrintWriter(Files.newBufferedWriter(path, StandardCharsets.UTF_8))){
 			for(VagaoPassageiros vagao:vagoesPassageiros){
@@ -139,7 +139,7 @@ public class CadastroVagoes {
 			System.err.format("Erro de E/S: %s%n", x);
 			}
 		}else if (tipoDeVagao.equals("VagaoCarga")){
-			String fName = "./vagoesCarga.txt";
+			String fName = "./Dados/vagoesCarga.txt";
 			Path path = Paths.get(fName);
 			try (PrintWriter writer = new PrintWriter(Files.newBufferedWriter(path, StandardCharsets.UTF_8))){
 			for(VagaoCarga vagao:vagoesCarga){

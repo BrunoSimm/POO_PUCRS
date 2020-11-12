@@ -54,7 +54,7 @@ public class CadastroLocomotivas {
 	}
 
 	public void carrega() {
-		String fName = "./locomotivas.txt";
+		String fName = "./Dados/locomotivas.txt";
 		Path path = Paths.get(fName);
 		try (Scanner sc = new Scanner(Files.newBufferedReader(path, StandardCharsets.UTF_8))) {
 			while (sc.hasNext()) {
@@ -73,7 +73,7 @@ public class CadastroLocomotivas {
 	}
 
 	public void persiste() {
-		String fName = "./locomotivas.txt";
+		String fName = "./Dados/locomotivas.txt";
 		Path path = Paths.get(fName);
 		try (PrintWriter writer = new PrintWriter(Files.newBufferedWriter(path, StandardCharsets.UTF_8))) {
 			for (Locomotiva locomotiva : locomotivas) {

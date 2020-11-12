@@ -46,7 +46,7 @@ public class App {
         ".\n\tNumero de vagões depois da remoção:"+cc.getPorIdentificador(9712).getQtdadeVagoes()+".");
 
         //Listar locomotivas e vagões livres/ocupadas
-        System.out.println("\nCadastro de Vagões de Carga:");
+        System.out.println("\nCadastro de Vagoes de Carga:");
             for (int i = 0; i < cv.getQtdade("VagaoCarga"); i++) {
                 System.out.println("\t"+cv.getPorPosicao("VagaoCarga",i).toString());
             }

@@ -81,7 +81,7 @@ public class CadastroComposicoes {
     }
 
     public void persiste() {
-        String fName = "./composicoes.txt";
+        String fName = "./Dados/composicoes.txt";
         String currDir = Paths.get("").toAbsolutePath().toString();
         String nameComplete = currDir + "/" + fName;
         Path path = Paths.get(nameComplete);
@@ -96,7 +96,7 @@ public class CadastroComposicoes {
     }
 
     public void carrega() {
-        String fName = "./composicoes.txt";
+        String fName = "./Dados/composicoes.txt";
         Path path = Paths.get(fName);
         try (Scanner sc = new Scanner(Files.newBufferedReader(path, StandardCharsets.UTF_8))) {
             while (sc.hasNext()) {
