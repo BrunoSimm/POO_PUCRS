@@ -1,11 +1,11 @@
-import java.util.Calendar;
+import java.time.LocalDate;
 
 public class FuncionarioManobrista extends Funcionario {
     private String numeroCNH;
     private String categoriaCNH;
-    private Calendar dataVencimentoCNH;
+    private LocalDate dataVencimentoCNH;
 
-    public FuncionarioManobrista(String nome, Calendar dataNascimento, String cpf, String numeroCNH, String categoriaCNH,Calendar dataVencimentoCNH) {
+    public FuncionarioManobrista(String nome, LocalDate dataNascimento, String cpf, String numeroCNH, String categoriaCNH,LocalDate dataVencimentoCNH) {
         super(nome, dataNascimento, cpf);
         this.numeroCNH = numeroCNH;
         this.categoriaCNH = categoriaCNH;
