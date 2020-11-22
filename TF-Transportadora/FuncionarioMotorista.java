@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.util.Calendar;
 
 public class FuncionarioMotorista extends Funcionario {
     private String numeroCNH;

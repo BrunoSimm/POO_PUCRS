@@ -1,4 +1,4 @@
-public abstract class Veiculo {
+public abstract class Veiculo implements Comparable {
    private String placa;
    private String modelo;
    private int anoFabricacao;
@@ -11,6 +11,14 @@ public abstract class Veiculo {
        this.peso = peso;
    }
 
+   @Override
+   public int compareTo(Object veiculo) {
+       if (veiculo instanceof Veiculo) {
+           int comparaAno = ((Veiculo) veiculo).getAnoFabricacao();
+           return this.anoFabricacao - comparaAno;
+       } else return -1;
+    }
+   
    public String getPlaca() {
        return placa;
    }
