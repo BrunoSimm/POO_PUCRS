@@ -37,6 +37,7 @@ public class App {
         c1.cadastrar(new Funcionario("aruno", validaData("1998-11-05"),"41111"));
         c1.cadastrar(new Funcionario("aaruno", validaData("1998-12-05"),"41111"));
         c1.listarFuncionarios();
+        System.out.println(c1.getByCPF("54655").getNome());
         
         CadastroVeiculos cv = new CadastroVeiculos();
         cv.cadastrar(new VeiculoCargas("123abc", "1asdasd", 10, 800, 5000, 4, true));

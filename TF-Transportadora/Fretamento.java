@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class Fretamento {
+public abstract class Fretamento {
     private int id; //Refatorar para receber ID de acordo com fretes que tem no cadastroFretes.java (TO DO)
     private Veiculo veiculo;
     private Funcionario condutor;
