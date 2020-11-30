@@ -1,5 +1,9 @@
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class CadastroFuncionarios {
     private LinkedList<Funcionario> funcionarios;
@@ -19,19 +23,34 @@ public class CadastroFuncionarios {
 
 
     public void listarFuncionarios(){
-        LinkedList<String> nomes = new LinkedList<String>();
-        for (Funcionario f : funcionarios) {
-            nomes.add(f.getNome());
-        }
 
-        Collections.sort(nomes);
-        System.out.println("Funcionarios em orgem alfabética:");
-        for (String nome : nomes) {
-            System.out.println(nome);
-        }
+        List<String> nomes = funcionarios.stream()
+            .map(f -> f.getNome() +" CPF:"+ f.getCpf())
+            .sorted() //Ordena em orgem alfabética
+            .collect(Collectors.toList());
+            System.out.println("Funcionarios em ordem alfabética:");
+            nomes.forEach(n -> {
+                System.out.println(n);
+            });
+            System.out.println();
     }
 
     public Funcionario getByCPF(String cpf){
+        /** 
+        Map<String,List<Funcionario>> f = funcionarios.stream()
+            .collect(Collectors.groupingBy(Funcionario::getNome));
+
+        f.forEach((n,fc) -> {
+            System.out.println(n+ "aaa"+fc);
+        });
+
+        funcionarios.stream()
+            .filter(fs -> fs.getCpf().equals(cpf))
+            .forEach(fs -> {
+                System.out.println(fs.getNome() +" CPF:"+ fs.getCpf());
+            });
+        */
+
         for (Funcionario funcionario : funcionarios) {
             if (funcionario.getCpf().equals(cpf)){
                 return funcionario;

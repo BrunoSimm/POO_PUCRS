@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Fretamento {
+    private int id; //Refatorar para receber ID de acordo com fretes que tem no cadastroFretes.java (TO DO)
     private Veiculo veiculo;
     private Funcionario condutor;
     private LocalDateTime dataInicio;
@@ -9,13 +10,14 @@ public class Fretamento {
     private double distancia;
     private double valor;
 
-    public Fretamento(Veiculo veiculo, Funcionario condutor, LocalDateTime dataInicio, LocalDateTime dataTermino, double distancia, double valor) {
+    public Fretamento(int id,Veiculo veiculo, Funcionario condutor, LocalDateTime dataInicio, LocalDateTime dataTermino, double distancia, double valor) {
         this.veiculo = veiculo;
         this.condutor = condutor;
         this.dataInicio = dataInicio;
         this.dataTermino = dataTermino;
         this.distancia = distancia;
         this.valor = valor;
+        this.id = id;
     }
 
     public Veiculo getVeiculo() {
@@ -66,5 +68,13 @@ public class Fretamento {
         this.valor = valor;
     }
 
+    public boolean setId(int id){
+        this.id = id;
+        return true;
+    }
+
+    public int getId(){
+        return this.id;
+    }
     
 }

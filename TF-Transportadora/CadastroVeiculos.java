@@ -1,5 +1,7 @@
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CadastroVeiculos {
     private LinkedList<Veiculo> veiculos;
@@ -19,24 +21,22 @@ public class CadastroVeiculos {
 
     
     public void listarVeiculos(){
-        LinkedList<Veiculo> temp = new LinkedList<Integer>();
+        LinkedList<Veiculo> temp = new LinkedList<Veiculo>();
+        temp = veiculos;
+        Collections.sort(temp); //compareTo() implementado para a classe Veiculo
 
-        Collections.sort(veiculos); //WORDKEEEEEEED!
+        System.out.println("Veiculos em ordem por ano de fabricação:");
+        for (Veiculo v : temp) {
+            System.out.println("Modelo: "+v.getModelo() +" Fabricação:"+v.getAnoFabricacao());
+        }
+    }
 
+    public Veiculo getByPlaca(String placa){
         for (Veiculo v : veiculos) {
-            System.out.println(v.getAnoFabricacao());
+            if (v.getPlaca().equals(placa)){
+                return v;
+            }
         }
-        /*
-            //USAR compareTo que foi implementado
-        for (Veiculo v : veiculos) {
-            anos.add(v.getAnoFabricacao());
-        }
-
-        Collections.sort(veiculos);
-        System.out.println("Veiculos em ordem de ano de fabrição:");
-        for (int ano : anos) {
-            System.out.println(ano);
-        }
-        */
+        return null;
     }
 }
