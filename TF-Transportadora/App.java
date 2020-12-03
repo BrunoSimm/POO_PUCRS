@@ -1,6 +1,4 @@
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
 public class App {
@@ -11,23 +9,8 @@ public class App {
     }
     public static void main(String[] args) {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
         Scanner sc = new Scanner(System.in);
-        /**
-        System.out.print("Digite uma data (ex: 23/11/2020): ");
-        String str = sc.nextLine();
-        LocalDate firstDate = LocalDate.parse(str, formatter);
-        System.out.println(firstDate);
-        System.out.println("Primeira data: " + formatter.format(firstDate));
-        System.out.println(firstDate);
-        System.out.print("Digite outra data: ");
-        str = sc.nextLine();
-        LocalDate secondDate = LocalDate.parse(str, formatter);
-        System.out.println("Segunda data: " + formatter.format(secondDate));
-        /* calcula a diferença em dias 
-        long days = ChronoUnit.DAYS.between(firstDate, secondDate);
-        System.out.println("Diferença entre as datas: " + days + " dias");
-        */
+        
         
         //LocalDateTime -> https://www.youtube.com/watch?v=5WrIWclE_Gc&ab_channel=AlgaWorks
         Funcionario f = new Funcionario("teste",validaData("1995-08-05"),"54655");
@@ -36,6 +19,7 @@ public class App {
         c1.cadastrar(new Funcionario("bruno", validaData("1998-02-04"),"41111"));//Refazer, funcionario deve ser abstract
         c1.cadastrar(new Funcionario("aruno", validaData("1998-11-05"),"41111"));
         c1.cadastrar(new Funcionario("aaruno", validaData("1998-12-05"),"41111"));
+        c1.cadastrar(new FuncionarioMotorista("Bruno",validaData("1998-08-05"),"04057357076","numeroCNH", "A", validaData("2020-08-05"),true,true));
         c1.listarFuncionarios();
         System.out.println(c1.getByCPF("54655").getNome());
         
@@ -47,6 +31,18 @@ public class App {
         cv.cadastrar(new VeiculoCargas("123abc", "asdasd", 1, 800, 5000, 4, true));
         cv.listarVeiculos();
         System.out.println(cv.getByPlaca("123abcd").getAnoFabricacao());
+
+        VeiculoPassageiros v1 = new VeiculoPassageiros("1", "modelo", 2016, 10000, 15);
+        Fretamento ftPassageiros = new FretamentoVeiculoPassageiros(1,v1,(FuncionarioMotorista)c1.getByCPF("04057357076"),validaData("2020-08-05"),validaData("2020-08-07"),100);
+
+        System.out.println(ftPassageiros.getValor());
+
+
+        VeiculoCargas v2 = new VeiculoCargas("placa", "modelo", 2012, 50000, 5000, 6, false);
+        FretamentoVeiculoCarga ftCarga = new FretamentoVeiculoCarga(2, v2, (FuncionarioMotorista)c1.getByCPF("04057357076"), validaData("2020-08-05"),validaData("2020-08-07"), 300, true);
+        System.out.println(ftCarga.getCargaPerigosa());
+
+        System.out.println(ftCarga.getValor());
         
 
 

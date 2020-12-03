@@ -1,27 +1,26 @@
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public abstract class Fretamento {
     private int id; //Refatorar para receber ID de acordo com fretes que tem no cadastroFretes.java (TO DO)
     private Veiculo veiculo;
     private Funcionario condutor;
-    private LocalDateTime dataInicio;
-    private LocalDateTime dataTermino;
+    private LocalDate dataInicio;
+    private LocalDate dataTermino;
     private double distancia;
     private double valor;
 
-    public Fretamento(int id,Veiculo veiculo, Funcionario condutor, LocalDateTime dataInicio, LocalDateTime dataTermino, double distancia, double valor) {
+    public Fretamento(int id,Veiculo veiculo, Funcionario condutor, LocalDate dataInicio, LocalDate dataTermino, double distancia) {
         this.veiculo = veiculo;
         this.condutor = condutor;
         this.dataInicio = dataInicio;
         this.dataTermino = dataTermino;
         this.distancia = distancia;
-        this.valor = valor;
         this.id = id;
+        this.valor = this.setValor();
     }
 
     public Veiculo getVeiculo() {
-        return veiculo;
+        return this.veiculo;
     }
 
     public void setVeiculo(Veiculo veiculo) {
@@ -36,19 +35,19 @@ public abstract class Fretamento {
         this.condutor = condutor;
     }
 
-    public LocalDateTime getDataInicio() {
+    public LocalDate getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(LocalDateTime dataInicio) {
+    public void setDataInicio(LocalDate dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public LocalDateTime getDataTermino() {
+    public LocalDate getDataTermino() {
         return dataTermino;
     }
 
-    public void setDataTermino(LocalDateTime dataTermino) {
+    public void setDataTermino(LocalDate dataTermino) {
         this.dataTermino = dataTermino;
     }
 
@@ -64,9 +63,7 @@ public abstract class Fretamento {
         return valor;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
+    abstract double setValor();
 
     public boolean setId(int id){
         this.id = id;

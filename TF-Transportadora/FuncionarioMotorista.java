@@ -16,5 +16,46 @@ public class FuncionarioMotorista extends Funcionario {
         this.cursoTransportePassageiros = cursoTransportePassageiros;
     }
 
+    public String getNumeroCNH() {
+        return numeroCNH;
+    }
+
+    public void setNumeroCNH(String numeroCNH) {
+        this.numeroCNH = numeroCNH;
+    }
+
+    public String getCategoriaCNH() {
+        return categoriaCNH;
+    }
+
+    public void setCategoriaCNH(String categoriaCNH) {
+        this.categoriaCNH = categoriaCNH;
+    }
+
+    public LocalDate getDataVencimentoCNH() {
+        return dataVencimentoCNH;
+    }
+
+    public void setDataVencimentoCNH(LocalDate dataVencimentoCNH) {
+        this.dataVencimentoCNH = dataVencimentoCNH;
+    }
+
+    public boolean isCursoCargaPerigosa() {
+        return cursoCargaPerigosa;
+    }
+
+    public void setCursoCargaPerigosa(boolean cursoCargaPerigosa) {
+        this.cursoCargaPerigosa = cursoCargaPerigosa;
+    }
+
+    public boolean isCursoTransportePassageiros() {
+        return cursoTransportePassageiros;
+    }
+
+    public void setCursoTransportePassageiros(boolean cursoTransportePassageiros) {
+        this.cursoTransportePassageiros = cursoTransportePassageiros;
+    }
+
+    
     
 }
