@@ -3,6 +3,7 @@ public abstract class Veiculo implements Comparable {
    private String modelo;
    private int anoFabricacao;
    private double peso;
+   private boolean isLivre = true;
 
    public Veiculo(String placa, String modelo, int anoFabricacao, double peso) {
        this.placa = placa;
@@ -49,6 +50,14 @@ public abstract class Veiculo implements Comparable {
 
    public void setPeso(double peso) {
        this.peso = peso;
+   }
+
+   public boolean isLivre() {
+       return isLivre;
+   }
+
+   public void setLivre(boolean isLivre) {
+       this.isLivre = isLivre;
    }
    
     

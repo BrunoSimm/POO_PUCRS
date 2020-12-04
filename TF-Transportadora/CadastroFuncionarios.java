@@ -54,7 +54,13 @@ public class CadastroFuncionarios {
     }
 
     public void listarMotoristasLivres(){
-        funcionarios.stream()//TODO!
+        funcionarios.stream()
+            .filter(f -> f instanceof FuncionarioMotorista)
+            .filter(fm -> fm.isOcupado() == false)
+            .forEach(fmL -> {
+                    System.out.println("Motorista Livre: "+fmL.getNome()+" CPF:"+fmL.getCpf());
+            });
+            
     }
     
 }

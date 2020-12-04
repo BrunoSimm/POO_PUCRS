@@ -2,10 +2,9 @@ import java.time.LocalDate;
 
 public class Funcionario {
     private String nome;
-    private LocalDate dataNascimento; //LocalDate https://www.youtube.com/watch?v=5WrIWclE_Gc&ab_channel=AlgaWorks
-    // Calendar: https://www.devmedia.com.br/trabalhando-com-as-classes-date-calendar-e-simpledateformat-em-java/27401
-    // API CALENDAR: https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/util/Calendar.html
+    private LocalDate dataNascimento;
     private String cpf;
+    private boolean ocupado = true;
 
     public Funcionario(String nome, LocalDate dataNascimento, String cpf) {
         this.nome = nome;
@@ -37,6 +36,12 @@ public class Funcionario {
         this.cpf = cpf;
     }
 
-    
+    public boolean isOcupado() {
+        return ocupado;
+    }
+
+    public void setOcupado(boolean ocupado) {
+        this.ocupado = ocupado;
+    }
 
 }

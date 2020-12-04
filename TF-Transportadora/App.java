@@ -21,6 +21,8 @@ public class App {
         c1.cadastrar(new Funcionario("aaruno", validaData("1998-12-05"),"41111"));
         c1.cadastrar(new FuncionarioMotorista("Bruno",validaData("1998-08-05"),"04057357076","numeroCNH", "A", validaData("2020-08-05"),true,true));
         c1.listarFuncionarios();
+        c1.listarMotoristasLivres();
+        System.out.println(c1.getByCPF("04057357076").isOcupado());
         
 
         //Cadastro de Veiculos - Base
@@ -35,14 +37,28 @@ public class App {
         cv.cadastrar(v1);
         cv.cadastrar(v2);
         cv.listarVeiculos();
+        cv.listarVeiculosLivres();
 
 
         //Cadastro de Fretamentos - Base
         Fretamento ftPassageiros = new FretamentoVeiculoPassageiros(1,v1,(FuncionarioMotorista)c1.getByCPF("04057357076"),validaData("2020-08-05"),validaData("2020-08-07"),100);
         Fretamento ftCarga = new FretamentoVeiculoCarga(2, v2, (FuncionarioMotorista)c1.getByCPF("04057357076"), validaData("2020-08-05"),validaData("2020-08-07"), 300, true);
 
-        FretamentoVeiculoCarga freteCarga = new FretamentoVeiculoCarga(3, v2,c1.getByCPF("04057357076"),validaData("2020-08-05"),validaData("2020-08-07"), 300, false);
-        
+        FretamentoVeiculoCarga freteCarga1 = new FretamentoVeiculoCarga(3, v2,c1.getByCPF("04057357076"),validaData("2020-08-05"),validaData("2020-08-07"), 300, false);
+        FretamentoVeiculoCarga freteCarga2 = new FretamentoVeiculoCarga(3, v2,c1.getByCPF("04057357076"),validaData("2020-08-05"),validaData("2020-08-07"), 400, false);
+        FretamentoVeiculoCarga freteCarga3 = new FretamentoVeiculoCarga(3, v2,c1.getByCPF("04057357076"),validaData("2020-08-05"),validaData("2020-08-07"), 500, true);
+        FretamentoVeiculoCarga freteCarga4 = new FretamentoVeiculoCarga(3, v2,c1.getByCPF("04057357076"),validaData("2020-08-05"),validaData("2020-08-07"), 600, false);
+
+        CadastroFretamentos cf = new CadastroFretamentos();
+        cf.cadastrar(ftCarga);
+        cf.cadastrar(ftPassageiros);
+        cf.cadastrar(freteCarga1);
+        cf.cadastrar(freteCarga2);
+        cf.cadastrar(freteCarga3);
+        cf.cadastrar(freteCarga4);
+        cf.listarfretamentosAtivos();
+        cf.listarHistoricoFretamentos();
+        cf.cincoMaisLucrativos();
         
     }
 }

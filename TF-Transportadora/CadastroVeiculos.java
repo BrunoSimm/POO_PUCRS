@@ -37,4 +37,13 @@ public class CadastroVeiculos {
         }
         return null;
     }
+
+    public void listarVeiculosLivres(){
+        veiculos.stream()
+            .filter(v -> v.isLivre() == true)
+            .forEach(vL -> {
+                    System.out.println("Veiculo Livre: "+vL.getModelo()+" Tipo:"+vL.getClass().getName()+" Placa: "+vL.getPlaca());
+            });
+            
+    }
 }
