@@ -1,13 +1,12 @@
 import java.time.LocalDate;
 
 public class FretamentoVeiculoCarga extends Fretamento {
-    private boolean cargaPerigosa = false;
+    private boolean cargaPerigosa;
 
-    public FretamentoVeiculoCarga(int id,VeiculoCargas veiculo, Funcionario condutor, LocalDate dataInicio,
-            LocalDate dataTermino, double distancia, boolean cargaPerigosa) {
-        super(id,veiculo, condutor, dataInicio, dataTermino, distancia);
-        this.cargaPerigosa = cargaPerigosa;
-        this.setCargaPerigosa(cargaPerigosa);
+    public FretamentoVeiculoCarga(int id,VeiculoCargas veiculo, Funcionario condutor, LocalDate dataInicio, LocalDate dataTermino, double distancia, boolean is_cargaPerigosa) {
+        super(id,veiculo,condutor, dataInicio, dataTermino, distancia);
+        this.cargaPerigosa = is_cargaPerigosa;
+        this.calculaValor();
     }
 
 	public boolean getCargaPerigosa() {
@@ -19,18 +18,16 @@ public class FretamentoVeiculoCarga extends Fretamento {
 	}
 
     @Override
-    public double setValor() {
+    void calculaValor() {
         double total = 0;
         VeiculoCargas v = (VeiculoCargas)this.getVeiculo();
-        System.out.println("Periogoso?"+this.getCargaPerigosa());
-        if(this.getCargaPerigosa() == true){
-            System.out.println("PERIOGOSO");
+
+        if(this.cargaPerigosa == true){
             total = total + (v.getNrEixos() * 1.50 * this.getDistancia());
-            return total;
+            this.setValor(total);
         } else {
-            System.out.println("NORMAL");
             total = total + (v.getNrEixos() * 1.20 * this.getDistancia());
-            return total;
+            this.setValor(total);
         }
     }
     

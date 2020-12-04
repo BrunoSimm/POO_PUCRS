@@ -52,5 +52,9 @@ public class CadastroFuncionarios {
         }
         return false;
     }
+
+    public void listarMotoristasLivres(){
+        funcionarios.stream()//TODO!
+    }
     
 }

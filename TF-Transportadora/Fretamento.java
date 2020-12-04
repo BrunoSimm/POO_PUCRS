@@ -16,7 +16,6 @@ public abstract class Fretamento {
         this.dataTermino = dataTermino;
         this.distancia = distancia;
         this.id = id;
-        this.valor = this.setValor();
     }
 
     public Veiculo getVeiculo() {
@@ -63,7 +62,11 @@ public abstract class Fretamento {
         return valor;
     }
 
-    abstract double setValor();
+    protected void setValor(double valor){
+        this.valor = valor;
+    }
+
+    abstract void calculaValor();
 
     public boolean setId(int id){
         this.id = id;

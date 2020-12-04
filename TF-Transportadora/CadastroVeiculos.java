@@ -23,7 +23,7 @@ public class CadastroVeiculos {
         temp = veiculos;
         Collections.sort(temp); //compareTo() implementado para a classe Veiculo
 
-        System.out.println("Veiculos em ordem por ano de fabricação:");
+        System.out.println("\nVeiculos em ordem por ano de fabricação:");
         for (Veiculo v : temp) {
             System.out.println("Modelo: "+v.getModelo() +" Fabricação:"+v.getAnoFabricacao());
         }
