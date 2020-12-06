@@ -21,10 +21,10 @@ public class CadastroFuncionarios {
     public void listarFuncionarios(){
         System.out.println("Funcionarios em ordem alfabética:");
         funcionarios.stream()
-            .map(f -> f.getNome() +" CPF:"+ f.getCpf()+" | "+f.getClass().getName())
+            .map(f -> f.getNome() +" CPF:"+ f.getCpf()+" | "+f.getClass().getName()+" | Ocupado: "+f.isOcupado())
             .sorted() //Ordena em ordem alfabética
             .forEach(f -> {
-                System.out.println(f);
+                System.out.println("\t"+f);
             });
     }
 

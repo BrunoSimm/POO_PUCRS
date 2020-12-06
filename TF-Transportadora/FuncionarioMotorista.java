@@ -10,7 +10,7 @@ public class FuncionarioMotorista extends Funcionario {
     public FuncionarioMotorista(String nome, LocalDate dataNascimento, String cpf, String numeroCNH, String categoriaCNH, LocalDate dataVencimentoCNH, boolean cursoCargaPerigosa, boolean cursoTransportePassageiros) {
         super(nome, dataNascimento, cpf);
         this.numeroCNH = numeroCNH;
-        this.categoriaCNH = categoriaCNH;
+        this.categoriaCNH = categoriaCNH.toUpperCase();
         this.dataVencimentoCNH = dataVencimentoCNH;
         this.cursoCargaPerigosa = cursoCargaPerigosa;
         this.cursoTransportePassageiros = cursoTransportePassageiros;

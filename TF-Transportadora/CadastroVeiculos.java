@@ -28,12 +28,12 @@ public class CadastroVeiculos {
         for (Veiculo v : temp) {
             if (v instanceof VeiculoCargas){
                 VeiculoCargas aux = (VeiculoCargas)v;
-                System.out.println("\n\t"+v.getModelo()+" | Tipo: "+v.getClass().getName()+" | Placa: "+v.getPlaca()+" | Capacidade Carga: "+aux.getCapacidadeCarga()+" | Livre: "+v.isLivre());
+                System.out.println("\n\t"+"Ano: "+v.getAnoFabricacao()+" | Modelo: "+v.getModelo()+" | Tipo: "+v.getClass().getName()+" | Placa: "+v.getPlaca()+" | Capacidade Carga: "+aux.getCapacidadeCarga());
             } else if (v instanceof VeiculoPassageiros){
                 VeiculoPassageiros aux = (VeiculoPassageiros)v;
-                System.out.println("\n\t"+v.getModelo()+" | Tipo: "+v.getClass().getName()+" | Placa: "+v.getPlaca()+" | Lotação Máxima: "+aux.getLotacaoMaxima()+" | Livre: "+v.isLivre());
+                System.out.println("\n\t"+"Ano: "+v.getAnoFabricacao()+" | Modelo: "+v.getModelo()+" | Tipo: "+v.getClass().getName()+" | Placa: "+v.getPlaca()+" | Lotação Máxima: "+aux.getLotacaoMaxima());
             } else {
-                System.out.println("\n\t"+v.getModelo()+" | Tipo: "+v.getClass().getName()+" | Placa: "+v.getPlaca()+" | Livre: "+v.isLivre());
+                System.out.println("\n\t"+"Ano: "+v.getAnoFabricacao()+" | Modelo: "+v.getModelo()+" | Tipo: "+v.getClass().getName()+" | Placa: "+v.getPlaca());
             }
         }
 
@@ -52,7 +52,7 @@ public class CadastroVeiculos {
             System.out.println("Veiculo não cadastrado. Digite uma placa para busca:");
             this.listarVeiculos();
             String placa1 = sc.nextLine();
-            sc.close();
+            
             return getByPlaca(placa1);
         } else {
             return temp;
@@ -66,12 +66,12 @@ public class CadastroVeiculos {
             .forEach(vL -> {
                 if (vL instanceof VeiculoCargas){
                     VeiculoCargas temp = (VeiculoCargas)vL;
-                    System.out.println("\n\tVeiculo Livre: "+vL.getModelo()+" | Tipo: "+vL.getClass().getName()+" | Placa: "+vL.getPlaca()+" | Capacidade Carga: "+temp.getCapacidadeCarga());
+                    System.out.println("\n\tVeiculo:"+vL.getModelo()+" | Tipo: "+vL.getClass().getName()+" | Placa: "+vL.getPlaca()+" | Peso: "+temp.getPeso()+" | Capacidade Carga: "+temp.getCapacidadeCarga());
                 } else if (vL instanceof VeiculoPassageiros){
                     VeiculoPassageiros temp = (VeiculoPassageiros)vL;
-                    System.out.println("\n\tVeiculo Livre: "+vL.getModelo()+" | Tipo: "+vL.getClass().getName()+" | Placa: "+vL.getPlaca()+" | Lotação Máxima: "+temp.getLotacaoMaxima());
+                    System.out.println("\n\tVeiculo:"+vL.getModelo()+" | Tipo: "+vL.getClass().getName()+" | Placa: "+vL.getPlaca()+" | Lotação Máxima: "+temp.getLotacaoMaxima());
                 } else {
-                    System.out.println("\n\tVeiculo Livre: "+vL.getModelo()+" | Tipo: "+vL.getClass().getName()+" | Placa: "+vL.getPlaca());
+                    System.out.println("\n\tVeiculo:"+vL.getModelo()+" | Tipo: "+vL.getClass().getName()+" | Placa: "+vL.getPlaca());
                 }
                     
             });

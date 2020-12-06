@@ -46,7 +46,7 @@ public class CadastroFretamentos{
             .sorted(Collections.reverseOrder())
             .limit(5)
             .forEach(f ->{
-                System.out.println(f);
+                System.out.println("R$"+f);
             });
     }
 

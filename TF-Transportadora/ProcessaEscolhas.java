@@ -56,7 +56,7 @@ public class ProcessaEscolhas implements DateMatcher{
                             String categoriaCNH = sc.nextLine();
                             System.out.println("Digite a data de vencimento da CNH: (Ex:2020-12-25)");
                             String dataVencimentoCNH = sc.nextLine();
-                            cadastroFuncionarios.cadastrar(new FuncionarioManobrista(nomeMano, validaData(dataNascimentoMano), cpfMano,numeroCNH,categoriaCNH,validaData(dataVencimentoCNH)));
+                            cadastroFuncionarios.cadastrar(new FuncionarioManobrista(nomeMano, validaData(dataNascimentoMano), cpfMano,numeroCNH,validaCNH(categoriaCNH),validaData(dataVencimentoCNH)));
                             break;
                         case 3:
                             System.out.println("Digite o nome:");
@@ -72,12 +72,12 @@ public class ProcessaEscolhas implements DateMatcher{
                             String categoriaCNH_Moto = sc.nextLine();
                             System.out.println("Digite a data de vencimento da CNH: (Ex:2020-12-25)");
                             String dataVencimentoCNH_Moto = sc.nextLine();
-                            System.out.println("Possui curso de carga perigosa? (Sim - True | Não - False");
-                            Boolean cargaPerigosa = sc.nextBoolean();
-                            System.out.println("Possui curso de transporte de Passageiros? (Sim - True | Não - False");
-                            Boolean tPassageiros = sc.nextBoolean();
-                            cadastroFuncionarios.cadastrar(new FuncionarioMotorista(nomeMoto, validaData(dataNascimentoMoto), cpfMoto,numeroCNH_Moto,categoriaCNH_Moto,validaData(dataVencimentoCNH_Moto),cargaPerigosa,tPassageiros));
-                            break;
+                            System.out.println("Possui curso de carga perigosa? (Sim | Nao)");
+                            String cargaPerigosa = sc.nextLine();
+                            System.out.println("Possui curso de transporte de Passageiros? (Sim | Nao)");
+                            String tPassageiros = sc.nextLine();                               
+                            cadastroFuncionarios.cadastrar(new FuncionarioMotorista(nomeMoto, validaData(dataNascimentoMoto), cpfMoto,numeroCNH_Moto,validaCNH(categoriaCNH_Moto),validaData(dataVencimentoCNH_Moto),validaCursoCargaPerigosa(cargaPerigosa),validaCursoPassageiros(tPassageiros)));
+                        break;
                         default:
                             break;
                     }
@@ -119,9 +119,10 @@ public class ProcessaEscolhas implements DateMatcher{
                             double capacidadeCarga = sc.nextDouble();
                             System.out.println("Digite o numero de Eixos:");
                             int nrEixos = sc.nextInt();
-                            System.out.println("Possui unidade acoplada? (Sim - True | Não - False");
-                            boolean unidadeAcoplada = sc.nextBoolean();
-                            cVeiculos.cadastrar(new VeiculoCargas(placa, modelo, anoFabricacao, peso, capacidadeCarga, nrEixos, unidadeAcoplada));
+                            System.out.println("Possui unidade acoplada? (Sim | Nao(sem acento)):");
+                            sc.nextLine();
+                            String unidadeAcoplada = sc.nextLine();
+                            cVeiculos.cadastrar(new VeiculoCargas(placa, modelo, anoFabricacao, peso, capacidadeCarga, nrEixos, validaUnidadeAcoplada(unidadeAcoplada)));
                         break;
                         case 2:
                             System.out.println("Digite a placa:");
@@ -135,7 +136,7 @@ public class ProcessaEscolhas implements DateMatcher{
                             double pesoP = sc.nextDouble();
                             System.out.println("Digite a lotação Máxima do veiculo: (15,26,46)");
                             int lotacaoMaxima = sc.nextInt();
-                            cVeiculos.cadastrar(new VeiculoPassageiros(placaP, modeloP, anoFabricacaoP, pesoP, lotacaoMaxima));
+                            cVeiculos.cadastrar(new VeiculoPassageiros(placaP, modeloP, anoFabricacaoP, pesoP, validaLotacaoMaxima(lotacaoMaxima)));
                         break;
                         case 3:
                             System.out.println("Digite a placa:");
@@ -170,7 +171,7 @@ public class ProcessaEscolhas implements DateMatcher{
                 cVeiculos.listarVeiculos();
             break;
             case 6:
-                System.out.println("Digite a Placa que deseja buscar:");
+                System.out.println("Digite a Placa do veículo que deseja buscar:");
                 String placa = sc.nextLine();
                 Veiculo f1 = cVeiculos.getByPlaca(placa);
                 System.out.println(f1 == null ? "Veiculo não cadastrado." : "Resultado da busca:\n"+f1.getPlaca() +" - "+f1.getModelo()+" | "+f1.getAnoFabricacao()+" | Livre: "+f1.isLivre());
@@ -214,7 +215,7 @@ public class ProcessaEscolhas implements DateMatcher{
                             sc.nextLine();
                             String placa2 = sc.nextLine();
                             cadastroFuncionarios.listarMotoristasLivres();
-                            System.out.println("Digite o CPF do motorista com CNH 'D' e Livre:");
+                            System.out.println("Digite o CPF do motorista com CNH Adequado e Livre:");
                             String cpf2 = sc.nextLine();
                             System.out.println("Digite a data de inicio do frete:(Ex:2020-12-25)");
                             String dataInicio2 = sc.nextLine();
@@ -222,10 +223,11 @@ public class ProcessaEscolhas implements DateMatcher{
                             String dataTermino2 = sc.nextLine();
                             System.out.println("Digite a distancia:");
                             double distancia2 = sc.nextDouble();
-                            System.out.println("Carga perigosa? Sim -> Digite: True | Não -> Digite: False");
-                            boolean is_cargaPerigosa = sc.nextBoolean();
+                            System.out.println("Carga perigosa? Sim | Nao (Sem acento):");
+                            sc.nextLine();
+                            String is_cargaPerigosa = sc.nextLine();
                             try {
-                                cFretamentos.cadastrar(new FretamentoVeiculoCarga((cFretamentos.getNumeroFretes()+1),(VeiculoCargas)cVeiculos.getByPlaca(placa2),(FuncionarioMotorista)cadastroFuncionarios.getByCPF(cpf2),validaData(dataInicio2),validaData(dataTermino2), distancia2, is_cargaPerigosa));
+                                cFretamentos.cadastrar(new FretamentoVeiculoCarga((cFretamentos.getNumeroFretes()+1),(VeiculoCargas)cVeiculos.getByPlaca(placa2),(FuncionarioMotorista)cadastroFuncionarios.getByCPF(cpf2),validaData(dataInicio2),validaData(dataTermino2), distancia2, validaIsCargaPerigosa(is_cargaPerigosa)));
                             } catch (Exception e) {
                                 System.out.println("ERRO!. Condutor deve estar devidamente habilitado para conduzir este veiculo.Tente novamente.\n");
                                 x = -1; 
@@ -251,8 +253,147 @@ public class ProcessaEscolhas implements DateMatcher{
             default:
                 break;
         }
-        sc.close();
+        
     }
+
+    public int validaLotacaoMaxima(int lotacaoMaxima){
+        if ((lotacaoMaxima == 15) || (lotacaoMaxima == 26) || (lotacaoMaxima == 46)){
+            return lotacaoMaxima;
+        } else{
+            Scanner sc = new Scanner(System.in);
+            int q = 0;
+            while(q == 0){
+                System.out.println("Erro de digitação. Lotação máxima deve ser de 15, 26 ou 46.\nTente novamente:");
+                System.out.println("Digite a lotação Máxima do veiculo: (15,26,46)");
+                lotacaoMaxima = sc.nextInt();
+                if ((lotacaoMaxima == 15) || (lotacaoMaxima == 26) || (lotacaoMaxima == 46)){
+                    q=1;
+                    return lotacaoMaxima;
+                } else q = 0; 
+            }
+            return lotacaoMaxima;
+        }
+    }
+
+
+    public boolean validaIsCargaPerigosa(String escolha){
+        if (escolha.equalsIgnoreCase("sim")){
+            return true;
+        } else if(escolha.equalsIgnoreCase("nao")){
+            return false;
+        } else{
+            Scanner sc = new Scanner(System.in);
+            int q = 0;
+            while(q == 0){
+                System.out.println("Erro de digitação. Digite apenas Sim ou Nao!(sem acento).\nTente novamente:");
+                System.out.println("Carga perigosa? Sim | Nao (Sem acento)");
+                String is_CargaPerigosa = sc.nextLine();
+                if (is_CargaPerigosa.equalsIgnoreCase("sim")){
+                    q=1;
+                    return true;
+                } else if(is_CargaPerigosa.equalsIgnoreCase("nao")){
+                    q=1;
+                    return false;
+                }
+            }
+            return false;
+        }
+        
+    }
+    public boolean validaCursoPassageiros(String escolha){
+        if (escolha.equalsIgnoreCase("sim")){
+            return true;
+        } else if(escolha.equalsIgnoreCase("nao")){
+            return false;
+        } else{
+            Scanner sc = new Scanner(System.in);
+            int q = 0;
+            while(q == 0){
+                System.out.println("Erro de digitação. Digite apenas Sim ou Nao!(Sem acento).\nTente novamente:");
+                System.out.println("Possui curso de transporte de Passageiros? (Sim | Nao)");
+                String cursoPassageiros = sc.nextLine();
+                if (cursoPassageiros.equalsIgnoreCase("sim")){
+                    q=1;
+                    return true;
+                } else if(cursoPassageiros.equalsIgnoreCase("nao")){
+                    q=1;
+                    return false;
+                }
+            }
+            return false;
+        }
+        
+    }
+
+    public boolean validaCursoCargaPerigosa(String escolha){
+        if (escolha.equalsIgnoreCase("sim")){
+            return true;
+        } else if(escolha.equalsIgnoreCase("nao")){
+            return false;
+        } else{
+            Scanner sc = new Scanner(System.in);
+            int q = 0;
+            while(q == 0){
+                System.out.println("Erro de digitação. Digite apenas Sim ou Nao!(Sem acento!).\nTente novamente:");
+                System.out.println("Possui curso de carga perigosa? (Sim | Nao)");
+                String cargaPerigosa = sc.nextLine();
+                if (cargaPerigosa.equalsIgnoreCase("sim")){
+                    q=1;
+                    return true;
+                } else if(cargaPerigosa.equalsIgnoreCase("nao")){
+                    q=1;
+                    return false;
+                }
+            }
+            return false;
+        }
+        
+    }
+    public boolean validaUnidadeAcoplada(String escolha){
+        if (escolha.equalsIgnoreCase("sim")){
+            return true;
+        } else if(escolha.equalsIgnoreCase("nao")){
+            return false;
+        } else{
+            Scanner sc = new Scanner(System.in);
+            int q = 0;
+            while(q == 0){
+                System.out.println("Erro de digitação. Digite apenas Sim ou Nao!(Sem acento).\nTente novamente:");
+                System.out.println("Possui unidade acoplada? (Sim | Nao)");
+                String unidadeAcoplada = sc.nextLine();
+                if (unidadeAcoplada.equalsIgnoreCase("sim")){
+                    q=1;
+                    return true;
+                } else if(unidadeAcoplada.equalsIgnoreCase("nao")){
+                    q=1;
+                    return false;
+                }
+            }
+            return false;
+        }
+    }
+
+    public String validaCNH(String categoriaCNH){
+        if ((categoriaCNH.equalsIgnoreCase("b"))
+        || (categoriaCNH.equalsIgnoreCase("c"))
+        || (categoriaCNH.equalsIgnoreCase("d")) 
+        || (categoriaCNH.equalsIgnoreCase("e"))){
+            return categoriaCNH;
+        } else {
+            int x = 0;
+            while(x != 1){
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Categoria de CNH inválida. Digite uma categria entre B,C,D ou E:");
+                String escolha = sc.nextLine();
+                if (escolha.equalsIgnoreCase("b") || escolha.equalsIgnoreCase("c") ||escolha.equalsIgnoreCase("d") ||escolha.equalsIgnoreCase("e")){
+                    x = 1;
+                    return escolha;
+                } else x = 0;
+            }
+        }
+        return null;
+    }
+
     public LocalDate validaData(String data){
         //Ex:2020-12-25
         try {
@@ -269,7 +410,7 @@ public class ProcessaEscolhas implements DateMatcher{
                     } else {
                         x=0;
                     }
-                    sc.close();
+                    
                 }
             return null;
         }
