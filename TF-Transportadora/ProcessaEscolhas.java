@@ -251,6 +251,7 @@ public class ProcessaEscolhas implements DateMatcher{
             default:
                 break;
         }
+        sc.close();
     }
     public LocalDate validaData(String data){
         //Ex:2020-12-25
@@ -268,6 +269,7 @@ public class ProcessaEscolhas implements DateMatcher{
                     } else {
                         x=0;
                     }
+                    sc.close();
                 }
             return null;
         }

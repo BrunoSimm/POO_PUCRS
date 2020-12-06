@@ -52,6 +52,7 @@ public class CadastroVeiculos {
             System.out.println("Veiculo não cadastrado. Digite uma placa para busca:");
             this.listarVeiculos();
             String placa1 = sc.nextLine();
+            sc.close();
             return getByPlaca(placa1);
         } else {
             return temp;

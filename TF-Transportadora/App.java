@@ -77,6 +77,7 @@ public class App {
             escolha = sc.nextInt();
             solicitaEscolhas(cadastroFuncionarios,cVeiculos,cFretamentos,escolha);
         }
+        sc.close();
     }
     public static void main(String[] args) {
         // Compilar utilizando "javac App.java -encoding UTF-8" para corrigir acentos.
