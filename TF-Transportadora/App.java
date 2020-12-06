@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class App {
 
-    public static LocalDate validaData(String data){
+    public static LocalDate validaData(String data){ // Remover!
         //Fazer validação da string, caso errada solicitar digitar novamente. (while)
         return LocalDate.parse(data);
     }
@@ -79,57 +79,48 @@ public class App {
         }
     }
     public static void main(String[] args) {
+        // Compilar utilizando "javac App.java -encoding UTF-8" para corrigir acentos.
         CadastroFuncionarios cadastroFuncionarios = new CadastroFuncionarios();
         CadastroVeiculos cVeiculos = new CadastroVeiculos();
         CadastroFretamentos cFretamentos = new CadastroFretamentos();
-        mostraMenu(cadastroFuncionarios,cVeiculos,cFretamentos);
-        
-        
-        
+
+
         //Cadastro de Funcionários - Base
-        Funcionario f = new Funcionario("Ciclano",validaData("1995-08-05"),"54655");
+        Funcionario f = new FuncionarioAdminstrativo("Ciclano",validaData("1995-08-05"),"13910460054");
         cadastroFuncionarios.cadastrar(f);
-        cadastroFuncionarios.cadastrar(new Funcionario("bruno", validaData("1998-02-04"),"41111"));//Refazer, funcionario deve ser abstract
-        cadastroFuncionarios.cadastrar(new Funcionario("aruno", validaData("1998-11-05"),"41111"));
-        cadastroFuncionarios.cadastrar(new Funcionario("aaruno", validaData("1998-12-05"),"41111"));
-        cadastroFuncionarios.cadastrar(new FuncionarioMotorista("Bruno",validaData("1998-08-05"),"04057357076","numeroCNH", "E", validaData("2020-08-05"),true,true));
-        cadastroFuncionarios.listarFuncionarios();
-        cadastroFuncionarios.listarMotoristasLivres();
-        
+        cadastroFuncionarios.cadastrar(new FuncionarioAdminstrativo("Fulano", validaData("1998-02-04"),"46817068096"));
+        cadastroFuncionarios.cadastrar(new FuncionarioManobrista("Beltrano", validaData("1998-11-05"),"26424255095","512315133","C",LocalDate.parse("2022-05-06")));
+        cadastroFuncionarios.cadastrar(new FuncionarioMotorista("Bruno", LocalDate.parse("1998-12-05"),"69049646000","123156445","D",LocalDate.parse("2024-04-07"),true,true));
+        cadastroFuncionarios.cadastrar(new FuncionarioMotorista("Simm",validaData("1998-08-05"),"27442982042","989545454", "E", validaData("2020-08-05"),true,true));
 
         //Cadastro de Veiculos - Base
-        cVeiculos.cadastrar(new VeiculoCargas("123abc", "1asdasd", 10, 800, 5000, 4, true));
-        cVeiculos.cadastrar(new VeiculoCargas("123abc", "asdasd", 12, 800, 5000, 4, true));
-        cVeiculos.cadastrar(new VeiculoCargas("123abcd", "asdasd", 8, 800, 5000, 4, true));
-        cVeiculos.cadastrar(new VeiculoCargas("123abc", "asdasd", 45, 800, 5000, 4, true));
-        cVeiculos.cadastrar(new VeiculoCargas("123abc", "asdasd", 1, 800, 5000, 4, true));
-        VeiculoPassageiros v1 = new VeiculoPassageiros("1", "modelo", 2016, 10000, 15);
-        VeiculoCargas v2 = new VeiculoCargas("placa", "modelo", 2012, 50000, 5000, 6, false);
+        cVeiculos.cadastrar(new VeiculoPasseio("HPU8816", "Toyota Corolla", 2021, 1500.0));
+        cVeiculos.cadastrar(new VeiculoUtilitarios("NEV7063", "Hyundai Tucson", 2014, 2100.0));
+        cVeiculos.cadastrar(new VeiculoCargas("CRK0806", "FORD F4000", 2008, 2400, 5000, 4, true));
+        cVeiculos.cadastrar(new VeiculoCargas("MRI6371", "Iveco DAILY 70 C 16", 2010, 2600, 5000, 4, false));
+        cVeiculos.cadastrar(new VeiculoCargas("MVD7388", "Volks 8.120 EURO III", 2015, 3600, 10000, 8, true));
+        VeiculoCargas v2 = new VeiculoCargas("JGY1384", "Truck", 2019, 13000, 28000, 6, false);
+        cVeiculos.cadastrar(new VeiculoPassageiros("JYW2362", "Renault Master", 2013, 2450, 15));
+        cVeiculos.cadastrar(new VeiculoPassageiros("TOI6872", "Ford Transit", 2020, 3600, 46));
+        VeiculoPassageiros v1 = new VeiculoPassageiros("JUV5361", "Ford Transit", 2018, 3400, 26);
         cVeiculos.cadastrar(v1);
         cVeiculos.cadastrar(v2);
-        cVeiculos.listarVeiculos();
-        cVeiculos.listarVeiculosLivres();
 
-        //try {
         //Cadastro de Fretamentos - Base
+        /*
         Fretamento ftPassageiros = new FretamentoVeiculoPassageiros(1,v1,(FuncionarioMotorista)cadastroFuncionarios.getByCPF("04057357076"),validaData("2020-08-05"),validaData("2020-08-07"),100);
         Fretamento ftCarga = new FretamentoVeiculoCarga(2, v2, (FuncionarioMotorista)cadastroFuncionarios.getByCPF("04057357076"), validaData("2020-08-05"),validaData("2020-08-07"), 300, true);
-
         FretamentoVeiculoCarga freteCarga1 = new FretamentoVeiculoCarga(3, v2,(FuncionarioMotorista)cadastroFuncionarios.getByCPF("04057357076"),validaData("2020-08-05"),validaData("2020-08-07"), 300, false);
-        
         FretamentoVeiculoCarga freteCarga2 = new FretamentoVeiculoCarga(3, v2,(FuncionarioMotorista)cadastroFuncionarios.getByCPF("04057357076"),validaData("2020-08-05"),validaData("2020-08-07"), 400, false);
         FretamentoVeiculoCarga freteCarga3 = new FretamentoVeiculoCarga(3, v2,(FuncionarioMotorista)cadastroFuncionarios.getByCPF("04057357076"),validaData("2020-08-05"),validaData("2020-08-07"), 500, true);
         FretamentoVeiculoCarga freteCarga4 = new FretamentoVeiculoCarga(3, v2,(FuncionarioMotorista)cadastroFuncionarios.getByCPF("04057357076"),validaData("2020-08-05"),validaData("2020-08-07"), 600, false);
-
-        
         cFretamentos.cadastrar(ftCarga);
         cFretamentos.cadastrar(ftPassageiros);
         cFretamentos.cadastrar(freteCarga1);
         cFretamentos.cadastrar(freteCarga2);
         cFretamentos.cadastrar(freteCarga3);
-        cFretamentos.cadastrar(freteCarga4);
-        cFretamentos.listarfretamentosAtivos();
-        cFretamentos.listarHistoricoFretamentos();
-        cFretamentos.cincoMaisLucrativos();             
+        cFretamentos.cadastrar(freteCarga4);*/
+
+        mostraMenu(cadastroFuncionarios,cVeiculos,cFretamentos);     
     }
 }

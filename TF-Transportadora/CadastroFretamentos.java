@@ -34,7 +34,7 @@ public class CadastroFretamentos{
         System.out.println("Histórico de Fretes:");
         fretamentosHistorico.forEach(frete -> {
             System.out.println("\tFrete ID: "+ frete.getId()+ " | Placa do veiculo:"+frete.getVeiculo().getPlaca()+" | CPF Condutor:"+frete.getCondutor().getCpf());
-            System.out.println("\t\tData de inicio:" + frete.getDataInicio()+" | Data Termino:"+frete.getDataTermino()+"\n");
+            System.out.println("\t\tData de inicio:" + frete.getDataInicio()+" | Data Termino:"+frete.getDataTermino()+" | Valor: R$"+frete.getValor()+"\n");
         });
     }
 

@@ -59,7 +59,7 @@ public class CadastroFuncionarios {
             .filter(fm -> fm.isOcupado() == false)
             .forEach(fmL -> {
                 FuncionarioMotorista temp = (FuncionarioMotorista)fmL;
-                    System.out.println("Motorista Livre: "+fmL.getNome()+" CPF:"+fmL.getCpf()+" CNH Tipo:"+(temp.getCategoriaCNH()));
+                    System.out.println("Motorista Livre: "+fmL.getNome()+" CPF:"+fmL.getCpf()+" CNH Tipo:"+(temp.getCategoriaCNH())+"\n\tHabilitado para carga perigosa? "+temp.isCursoCargaPerigosa()+" | Habilitado para transporte de passageiros? "+temp.cursoTransportePassageiros());
             });
             
     }

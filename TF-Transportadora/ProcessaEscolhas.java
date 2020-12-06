@@ -1,8 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
-public class ProcessaEscolhas {
+public class ProcessaEscolhas implements DateMatcher{
     CadastroFuncionarios cadastroFuncionarios;
     CadastroVeiculos cVeiculos;
     CadastroFretamentos cFretamentos;
@@ -172,7 +173,7 @@ public class ProcessaEscolhas {
                 System.out.println("Digite a Placa que deseja buscar:");
                 String placa = sc.nextLine();
                 Veiculo f1 = cVeiculos.getByPlaca(placa);
-                System.out.println(f1 == null ? "Veiculo não cadastrado." : "Resultado da busca:\n"+f1.getPlaca() +" - "+f1.getModelo()+" | "+f1.getAnoFabricacao());
+                System.out.println(f1 == null ? "Veiculo não cadastrado." : "Resultado da busca:\n"+f1.getPlaca() +" - "+f1.getModelo()+" | "+f1.getAnoFabricacao()+" | Livre: "+f1.isLivre());
             break;
             case 7:
                 while (x != 0){
@@ -199,7 +200,13 @@ public class ProcessaEscolhas {
                             String dataTermino1 = sc.nextLine();
                             System.out.println("Digite a distancia:");
                             double distancia1 = sc.nextDouble();
-                            cFretamentos.cadastrar(new FretamentoVeiculoPassageiros((cFretamentos.getNumeroFretes()+1),((VeiculoPassageiros)cVeiculos.getByPlaca(placa1)),(FuncionarioMotorista)cadastroFuncionarios.getByCPF(cpf1), validaData(dataInicio1), validaData(dataTermino1), distancia1));
+                            try {
+                                cFretamentos.cadastrar(new FretamentoVeiculoPassageiros((cFretamentos.getNumeroFretes()+1),((VeiculoPassageiros)cVeiculos.getByPlaca(placa1)),(FuncionarioMotorista)cadastroFuncionarios.getByCPF(cpf1), validaData(dataInicio1), validaData(dataTermino1), distancia1));
+                            } catch (Exception e) {
+                                System.out.println("Erro. Condutor deve estar devidamente habilitado para conduzir este veiculo.Tente novamente.");
+                                x = -1; //Reinicia a escolha.
+                            }
+                          
                         break;
                         case 2:
                             cVeiculos.listarVeiculosLivres();
@@ -215,49 +222,63 @@ public class ProcessaEscolhas {
                             String dataTermino2 = sc.nextLine();
                             System.out.println("Digite a distancia:");
                             double distancia2 = sc.nextDouble();
+                            System.out.println("Carga perigosa? Sim -> Digite: True | Não -> Digite: False");
+                            boolean is_cargaPerigosa = sc.nextBoolean();
+                            try {
+                                cFretamentos.cadastrar(new FretamentoVeiculoCarga((cFretamentos.getNumeroFretes()+1),(VeiculoCargas)cVeiculos.getByPlaca(placa2),(FuncionarioMotorista)cadastroFuncionarios.getByCPF(cpf2),validaData(dataInicio2),validaData(dataTermino2), distancia2, is_cargaPerigosa));
+                            } catch (Exception e) {
+                                System.out.println("ERRO!. Condutor deve estar devidamente habilitado para conduzir este veiculo.Tente novamente.\n");
+                                x = -1; 
+                            }
                         break;
                         default:
-                            break;
+                        break;
                     }  
-                }   
+                }  
             break;
-        
-            /*
-                case 8:
-                    pE.processarEscolha(escolha);
-                    break;
-                case 9:
-                    pE.processarEscolha(escolha);
-                    break;
-                case 10:
-                    pE.processarEscolha(escolha);
-                    break;
-                case 11:
-                    pE.processarEscolha(escolha);
-                    break;
-        */
+            case 8:
+                cadastroFuncionarios.listarMotoristasLivres();
+            break;
+            case 9:
+                cVeiculos.listarVeiculosLivres();
+            break;
+            case 10:
+                cFretamentos.listarHistoricoFretamentos();
+            break;
+            case 11:
+                cFretamentos.cincoMaisLucrativos();
+            break;
             default:
                 break;
         }
     }
     public LocalDate validaData(String data){
         //Ex:2020-12-25
-        //Fazer validação da string, caso errada solicitar digitar novamente. (while)
         try {
             return LocalDate.parse(data);
         } catch (DateTimeParseException e) {
-            try{
-                System.out.println("Formato de data inválido.\nDigite utilizando o padrão ANO-MÊS-DIA Ex: 2020-12-25");
-                Scanner sc = new Scanner(System.in);
-                String newData = sc.nextLine();
-                return LocalDate.parse(newData);
-            } catch (DateTimeParseException e2) {
-                System.out.println("Formato de data inválido!!\nDigite obrigatoriamente utilizando o padrão ANO-MÊS-DIA. Ex: 2020-12-25");
-                Scanner sc = new Scanner(System.in);
-                
-                String newData = sc.nextLine();
-                return LocalDate.parse(newData);
-            }
+            int x = 0;
+                while(x != 1){
+                    Scanner sc = new Scanner(System.in);
+                    System.out.println("Formato de data inválido.\nDigite utilizando o padrão ANO-MÊS-DIA Ex: 2020-08-04");
+                    String newData = sc.nextLine();
+                    if (matches(newData) == true){
+                        x = 1;
+                        return LocalDate.parse(newData);
+                    } else {
+                        x=0;
+                    }
+                }
+            return null;
         }
+    }
+
+    //Regex
+    private static Pattern DATE_PATTERN = Pattern.compile(
+      "^\\d{4}-\\d{2}-\\d{2}$");
+
+    @Override
+    public boolean matches(String date) {
+        return DATE_PATTERN.matcher(date).matches();
     }
 }

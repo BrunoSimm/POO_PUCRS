@@ -19,7 +19,7 @@ public abstract class Fretamento {
             this.distancia = distancia;
             veiculo.setLivre(false);
             condutor.setOcupado(true);
-        } else throw new IllegalArgumentException("Erro. Condutor deve estar devidamente habilitado para conduzir este veiculo.Tente novamente.");
+        } else throw new IllegalArgumentException();
     }
 
     private boolean validaCondutor(Veiculo veiculo, FuncionarioMotorista condutor){
@@ -32,14 +32,12 @@ public abstract class Fretamento {
             VeiculoCargas vc = (VeiculoCargas)veiculo;
 
             if (veiculo.getPeso() <= 3500){
-                if (condutor.getCategoriaCNH().equals("B") || condutor.getCategoriaCNH().equals("C")){
-                    return true;
-                } else return false;
+                    return true; // Qualquer carteira pode dirigir este veiculo.
             } else if (veiculo.getPeso() > 3500){
-                if (condutor.getCategoriaCNH().equals("C") || condutor.getCategoriaCNH().equals("D")){
+                if (condutor.getCategoriaCNH().equals("C") || condutor.getCategoriaCNH().equals("D") || condutor.getCategoriaCNH().equals("E")){
                     return true;
                 } else return false;
-            } else if (vc.unidadeAcoplada() == true && (vc.getPeso() >= 6000)){
+            } else if ((vc.unidadeAcoplada() == true) && (vc.getPeso() >= 6000)){
                 if(condutor.getCategoriaCNH().equals("E")){
                     return true;
                 } else return false;

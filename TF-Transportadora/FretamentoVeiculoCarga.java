@@ -7,6 +7,7 @@ public class FretamentoVeiculoCarga extends Fretamento {
         super(id,veiculo,condutor, dataInicio, dataTermino, distancia);
         this.cargaPerigosa = is_cargaPerigosa;
         this.calculaValor(veiculo,this);
+        System.out.println("Fretamento de Carga cadastrado com sucesso!\n");
     }
 
 	public boolean getCargaPerigosa() {

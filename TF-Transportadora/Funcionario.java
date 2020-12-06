@@ -1,10 +1,10 @@
 import java.time.LocalDate;
 
-public class Funcionario {
+public abstract class Funcionario {
     private String nome;
     private LocalDate dataNascimento;
     private String cpf;
-    private boolean ocupado = true;
+    private boolean ocupado = false;
 
     public Funcionario(String nome, LocalDate dataNascimento, String cpf) {
         this.nome = nome;
