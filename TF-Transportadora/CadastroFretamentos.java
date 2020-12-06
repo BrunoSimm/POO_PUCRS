@@ -1,5 +1,4 @@
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedList;
 
 public class CadastroFretamentos{
@@ -11,7 +10,9 @@ public class CadastroFretamentos{
         this.fretamentosHistorico = new LinkedList<Fretamento>();
     }
     
-
+    public int getNumeroFretes(){
+        return fretamentosHistorico.size();
+    }
     public boolean cadastrar(Fretamento frete){
         if (frete != null){
             this.fretamentosAtivos.add(frete);

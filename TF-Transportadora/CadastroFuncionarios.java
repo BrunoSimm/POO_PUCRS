@@ -21,7 +21,7 @@ public class CadastroFuncionarios {
     public void listarFuncionarios(){
         System.out.println("Funcionarios em ordem alfabética:");
         funcionarios.stream()
-            .map(f -> f.getNome() +" CPF:"+ f.getCpf())
+            .map(f -> f.getNome() +" CPF:"+ f.getCpf()+" | "+f.getClass().getName())
             .sorted() //Ordena em ordem alfabética
             .forEach(f -> {
                 System.out.println(f);
@@ -58,7 +58,8 @@ public class CadastroFuncionarios {
             .filter(f -> f instanceof FuncionarioMotorista)
             .filter(fm -> fm.isOcupado() == false)
             .forEach(fmL -> {
-                    System.out.println("Motorista Livre: "+fmL.getNome()+" CPF:"+fmL.getCpf());
+                FuncionarioMotorista temp = (FuncionarioMotorista)fmL;
+                    System.out.println("Motorista Livre: "+fmL.getNome()+" CPF:"+fmL.getCpf()+" CNH Tipo:"+(temp.getCategoriaCNH()));
             });
             
     }

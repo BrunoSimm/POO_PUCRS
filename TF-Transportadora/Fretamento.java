@@ -9,13 +9,42 @@ public abstract class Fretamento {
     private double distancia;
     private double valor;
 
-    public Fretamento(int id,Veiculo veiculo, Funcionario condutor, LocalDate dataInicio, LocalDate dataTermino, double distancia) {
-        this.veiculo = veiculo;
-        this.condutor = condutor;
-        this.dataInicio = dataInicio;
-        this.dataTermino = dataTermino;
-        this.distancia = distancia;
-        this.id = id;
+    public Fretamento(int id,Veiculo veiculo, FuncionarioMotorista condutor, LocalDate dataInicio, LocalDate dataTermino, double distancia){
+        if (validaCondutor(veiculo,condutor) == true){
+            this.id = id;
+            this.veiculo = veiculo;
+            this.condutor = condutor;
+            this.dataInicio = dataInicio;
+            this.dataTermino = dataTermino;
+            this.distancia = distancia;
+            veiculo.setLivre(false);
+            condutor.setOcupado(true);
+        } else throw new IllegalArgumentException("Erro. Condutor deve estar devidamente habilitado para conduzir este veiculo.Tente novamente.");
+    }
+
+    private boolean validaCondutor(Veiculo veiculo, FuncionarioMotorista condutor){
+        //Todos os veiculos de passageiros possuem mais de 8 passageiros.
+        if (veiculo instanceof VeiculoPassageiros){ 
+            if (condutor.getCategoriaCNH().equals("D") && (condutor.cursoTransportePassageiros() == true)){
+                return true;
+            } else return false;
+        } else if (veiculo instanceof VeiculoCargas){
+            VeiculoCargas vc = (VeiculoCargas)veiculo;
+
+            if (veiculo.getPeso() <= 3500){
+                if (condutor.getCategoriaCNH().equals("B") || condutor.getCategoriaCNH().equals("C")){
+                    return true;
+                } else return false;
+            } else if (veiculo.getPeso() > 3500){
+                if (condutor.getCategoriaCNH().equals("C") || condutor.getCategoriaCNH().equals("D")){
+                    return true;
+                } else return false;
+            } else if (vc.unidadeAcoplada() == true && (vc.getPeso() >= 6000)){
+                if(condutor.getCategoriaCNH().equals("E")){
+                    return true;
+                } else return false;
+            } else return false;
+        } else return false;
     }
 
     public Veiculo getVeiculo() {
@@ -66,7 +95,7 @@ public abstract class Fretamento {
         this.valor = valor;
     }
 
-    abstract void calculaValor();
+    abstract void calculaValor(Veiculo v,Fretamento f);
 
     public boolean setId(int id){
         this.id = id;

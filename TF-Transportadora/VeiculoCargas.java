@@ -9,7 +9,7 @@ public class VeiculoCargas extends Veiculo{
         this.capacidadeCarga = capacidadeCarga;
         this.nrEixos = nrEixos;
         this.unidadeAcoplada = unidadeAcoplada;
-        
+        System.out.println("Veiculo de Carga adicionado!\n");
     }
 
     public double getCapacidadeCarga() {
@@ -28,7 +28,7 @@ public class VeiculoCargas extends Veiculo{
         this.nrEixos = nrEixos;
     }
 
-    public boolean isUnidadeAcoplada() {
+    public boolean unidadeAcoplada() {
         return unidadeAcoplada;
     }
 

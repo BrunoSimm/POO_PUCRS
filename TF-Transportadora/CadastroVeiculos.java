@@ -1,5 +1,6 @@
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class CadastroVeiculos {
     private LinkedList<Veiculo> veiculos;
@@ -25,20 +26,30 @@ public class CadastroVeiculos {
 
         System.out.println("\nVeiculos em ordem por ano de fabricação:");
         for (Veiculo v : temp) {
-            System.out.println("Modelo: "+v.getModelo() +" Fabricação:"+v.getAnoFabricacao());
+            System.out.println("Modelo: "+v.getModelo() +" Fabricação:"+v.getAnoFabricacao()+" Placa:"+v.getPlaca() +" Livre: "+v.isLivre());
         }
     }
 
     public Veiculo getByPlaca(String placa){
+        Veiculo temp = null;
         for (Veiculo v : veiculos) {
             if (v.getPlaca().equals(placa)){
-                return v;
+                temp = v;
             }
         }
-        return null;
+        if (temp == null){
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Veiculo não cadastrado. Digite uma placa para busca:");
+            this.listarVeiculos();
+            String placa1 = sc.nextLine();
+            return getByPlaca(placa1);
+        } else {
+            return temp;
+        }
     }
 
     public void listarVeiculosLivres(){
+        System.out.println("\nVeiculos Livres:");
         veiculos.stream()
             .filter(v -> v.isLivre() == true)
             .forEach(vL -> {

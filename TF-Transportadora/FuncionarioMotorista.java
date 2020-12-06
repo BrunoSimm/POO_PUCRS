@@ -14,6 +14,7 @@ public class FuncionarioMotorista extends Funcionario {
         this.dataVencimentoCNH = dataVencimentoCNH;
         this.cursoCargaPerigosa = cursoCargaPerigosa;
         this.cursoTransportePassageiros = cursoTransportePassageiros;
+        System.out.println("Funcionario Motorista adicionado!\n");
     }
 
     public String getNumeroCNH() {
@@ -48,7 +49,7 @@ public class FuncionarioMotorista extends Funcionario {
         this.cursoCargaPerigosa = cursoCargaPerigosa;
     }
 
-    public boolean isCursoTransportePassageiros() {
+    public boolean cursoTransportePassageiros() {
         return cursoTransportePassageiros;
     }
 

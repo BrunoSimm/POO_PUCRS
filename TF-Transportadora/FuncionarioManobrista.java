@@ -10,6 +10,7 @@ public class FuncionarioManobrista extends Funcionario {
         this.numeroCNH = numeroCNH;
         this.categoriaCNH = categoriaCNH;
         this.dataVencimentoCNH = dataVencimentoCNH;
+        System.out.println("Funcionario Manobrista adicionado!\n");
     }
 
     public String getNumeroCNH() {

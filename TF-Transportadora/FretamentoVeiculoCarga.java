@@ -3,10 +3,10 @@ import java.time.LocalDate;
 public class FretamentoVeiculoCarga extends Fretamento {
     private boolean cargaPerigosa;
 
-    public FretamentoVeiculoCarga(int id,VeiculoCargas veiculo, Funcionario condutor, LocalDate dataInicio, LocalDate dataTermino, double distancia, boolean is_cargaPerigosa) {
+    public FretamentoVeiculoCarga(int id,VeiculoCargas veiculo, FuncionarioMotorista condutor, LocalDate dataInicio, LocalDate dataTermino, double distancia, boolean is_cargaPerigosa) {
         super(id,veiculo,condutor, dataInicio, dataTermino, distancia);
         this.cargaPerigosa = is_cargaPerigosa;
-        this.calculaValor();
+        this.calculaValor(veiculo,this);
     }
 
 	public boolean getCargaPerigosa() {
@@ -18,7 +18,7 @@ public class FretamentoVeiculoCarga extends Fretamento {
 	}
 
     @Override
-    void calculaValor() {
+    void calculaValor(Veiculo veiculo,Fretamento frete) {
         double total = 0;
         VeiculoCargas v = (VeiculoCargas)this.getVeiculo();
 
