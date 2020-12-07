@@ -402,7 +402,7 @@ public class ProcessaEscolhas implements DateMatcher{
             int x = 0;
                 while(x != 1){
                     Scanner sc = new Scanner(System.in);
-                    System.out.println("Formato de data inválido.\nDigite utilizando o padrão ANO-MÊS-DIA Ex: 2020-08-04");
+                    System.out.println("Erro!Formato de data inválido.\nDigite utilizando o padrão ANO-MÊS-DIA (Ex: 2020-08-04):");
                     String newData = sc.nextLine();
                     if (matches(newData) == true){
                         x = 1;

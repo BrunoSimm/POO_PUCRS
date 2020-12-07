@@ -34,11 +34,11 @@ public abstract class Fretamento {
             if (veiculo.getPeso() <= 3500){
                     return true; // Qualquer carteira pode dirigir este veiculo.
             } else if (veiculo.getPeso() > 3500){
-                if (condutor.getCategoriaCNH().equals("C") || condutor.getCategoriaCNH().equals("D") || condutor.getCategoriaCNH().equals("E")){
+                if (condutor.getCategoriaCNH().equalsIgnoreCase("C") || condutor.getCategoriaCNH().equalsIgnoreCase("D") || condutor.getCategoriaCNH().equalsIgnoreCase("E")){
                     return true;
                 } else return false;
             } else if ((vc.unidadeAcoplada() == true) && (vc.getPeso() >= 6000)){
-                if(condutor.getCategoriaCNH().equals("E")){
+                if(condutor.getCategoriaCNH().equalsIgnoreCase("E")){
                     return true;
                 } else return false;
             } else return false;

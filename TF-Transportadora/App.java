@@ -85,7 +85,7 @@ public class App {
         CadastroFretamentos cFretamentos = new CadastroFretamentos();
 
 
-        //Cadastro de Funcionários - Base
+        //Cadastro de Funcionários - Base de dados
         cadastroFuncionarios.cadastrar(new FuncionarioAdminstrativo("Ciclano",validaData("1995-08-05"),"13910460054"));
         cadastroFuncionarios.cadastrar(new FuncionarioAdminstrativo("Fulano", validaData("1998-06-04"),"46817068096"));
         cadastroFuncionarios.cadastrar(new FuncionarioManobrista("Beltrano", validaData("2000-02-05"),"26424255095","512315133","C",LocalDate.parse("2022-05-06")));
@@ -94,7 +94,7 @@ public class App {
         cadastroFuncionarios.cadastrar(new FuncionarioMotorista("Alves",validaData("1991-10-14"),"866678800332","189544122", "B", validaData("2022-03-20"),false,false));
         cadastroFuncionarios.cadastrar(new FuncionarioMotorista("Gregorio",validaData("1985-04-21"),"45514681009","429518549", "D", validaData("2025-04-07"),false,true));
 
-        //Cadastro de Veiculos - Base
+        //Cadastro de Veiculos - Base de dados
         cVeiculos.cadastrar(new VeiculoPasseio("HPU8816", "Toyota Corolla", 2021, 1500.0));
         cVeiculos.cadastrar(new VeiculoUtilitarios("NEV7063", "Hyundai Tucson", 2014, 2100.0));
         cVeiculos.cadastrar(new VeiculoCargas("CRK0806", "FORD F4000", 2008, 2400, 5000, 4, true));
@@ -106,7 +106,7 @@ public class App {
         cVeiculos.cadastrar(new VeiculoPassageiros("JUV5361", "Ford", 2018, 3400, 26));
         
 
-        //Cadastro de Fretamentos - Base
+        //Cadastro de Fretamentos - Base de dados
         Fretamento ftPassageiros = new FretamentoVeiculoPassageiros(1,(VeiculoPassageiros)cVeiculos.getByPlaca("JYW2362"),(FuncionarioMotorista)cadastroFuncionarios.getByCPF("69049646000"),LocalDate.parse("2020-12-05"),LocalDate.parse("2020-12-07"),600);
         Fretamento ftCarga = new FretamentoVeiculoCarga(2,(VeiculoCargas)cVeiculos.getByPlaca("JGY1384"), (FuncionarioMotorista)cadastroFuncionarios.getByCPF("27442982042"), LocalDate.parse("2020-08-05"),LocalDate.parse("2020-08-07"), 300, true);
         cFretamentos.cadastrar(ftCarga);

@@ -40,7 +40,7 @@ public class CadastroFretamentos{
 
 
     public void cincoMaisLucrativos(){
-        System.out.println("Top 5 Fretamentos mais Lucrativos:");
+        System.out.println("\nTop 5 Fretes mais Lucrativos:");
         fretamentosHistorico.stream()
             .map(f -> f.getValor() + " ID:"+f.getId())
             .sorted(Collections.reverseOrder())
