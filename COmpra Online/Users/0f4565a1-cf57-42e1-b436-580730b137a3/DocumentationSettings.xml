@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<DocumentationSettings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceType>User</SourceType>
+  <PdfPath>C:\Users\Usuário\Desktop\COmpraOnlinePDF.pdf</PdfPath>
+  <WordTemplatePath />
+  <ExportBPMNAttachments>false</ExportBPMNAttachments>
+  <ShapeFilters />
+  <RoleFiltersString>{}</RoleFiltersString>
+  <SelectedDiagrams>
+    <DiagramId>987a9c7d-3c6b-446a-960d-efa08611b8df</DiagramId>
+  </SelectedDiagrams>
+  <Settings>
+    <DiagramDocumentationSettings ElementId="987a9c7d-3c6b-446a-960d-efa08611b8df">
+      <ProcessSettings>
+        <ProcessDocSettings ProcessId="855f6e02-adf1-419e-9390-309ea8cc2b90">
+          <Elements>
+            <Id>2a865c94-c9dd-4ef9-a2fe-80e3e62f058a</Id>
+            <Id>2f0324bb-1af3-4393-81b3-6c7fc928ddc6</Id>
+            <Id>a23bd279-0f64-4d54-ae7f-e692fbb14319</Id>
+            <Id>16d1d0d9-581f-4547-a595-2d74b5277530</Id>
+            <Id>d5845ec8-b07b-4742-9a2a-a36713c5acf5</Id>
+            <Id>93e8095c-9c78-4a17-adba-696181a9a4de</Id>
+            <Id>fcddfecc-b196-4c00-8ec7-155be0162dec</Id>
+            <Id>0d13233d-dfbb-495d-a92b-7517f6bd5d22</Id>
+            <Id>acc35a64-5d7c-4793-bddd-7dc372c13707</Id>
+            <Id>cc5d0673-7049-4d20-a317-3bc96ddec909</Id>
+            <Id>7cc57720-e06c-4357-9afa-a763e52e3989</Id>
+            <Id>68d655f5-1f57-4608-ba21-f0f94b89bc21</Id>
+            <Id>8bcf0ae4-d6e0-4993-9a6f-37881af04272</Id>
+            <Id>9ce867e9-a919-40ac-a9be-25c1f88a9b24</Id>
+            <Id>9fa03998-601e-4c2c-a8ae-b9eb46c4dba3</Id>
+            <Id>3b8dc27e-0a38-41ba-b71f-b4a03af3b42f</Id>
+          </Elements>
+        </ProcessDocSettings>
+        <ProcessDocSettings ProcessId="0531419e-8209-49fb-affa-76dc7da9405c">
+          <Elements>
+            <Id>ba25f743-aa0e-4fad-9380-c7f68dc9c28e</Id>
+            <Id>c2dc46f4-f9cb-4aa0-a1d9-a17e1d4e7463</Id>
+            <Id>ebd44a54-863e-45ea-af82-06bd1d3a2035</Id>
+          </Elements>
+        </ProcessDocSettings>
+      </ProcessSettings>
+    </DiagramDocumentationSettings>
+  </Settings>
+</DocumentationSettings>

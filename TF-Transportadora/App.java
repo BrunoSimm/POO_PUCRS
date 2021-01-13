@@ -3,11 +3,6 @@ import java.util.Scanner;
 
 public class App {
 
-    public static LocalDate validaData(String data){ // Remover!
-        //Fazer validação da string, caso errada solicitar digitar novamente. (while)
-        return LocalDate.parse(data);
-    }
-
     public static void solicitaEscolhas(CadastroFuncionarios cadastroFuncionarios,CadastroVeiculos cVeiculos,CadastroFretamentos cFretamentos,int escolha){
         //Classe Utilizada para executar as escolhas de funções.
         ProcessaEscolhas pE = new ProcessaEscolhas(cadastroFuncionarios,cVeiculos,cFretamentos);
@@ -86,13 +81,13 @@ public class App {
 
 
         //Cadastro de Funcionários - Base de dados
-        cadastroFuncionarios.cadastrar(new FuncionarioAdminstrativo("Ciclano",validaData("1995-08-05"),"13910460054"));
-        cadastroFuncionarios.cadastrar(new FuncionarioAdminstrativo("Fulano", validaData("1998-06-04"),"46817068096"));
-        cadastroFuncionarios.cadastrar(new FuncionarioManobrista("Beltrano", validaData("2000-02-05"),"26424255095","512315133","C",LocalDate.parse("2022-05-06")));
+        cadastroFuncionarios.cadastrar(new FuncionarioAdminstrativo("Ciclano",LocalDate.parse("1995-08-05"),"13910460054"));
+        cadastroFuncionarios.cadastrar(new FuncionarioAdminstrativo("Fulano", LocalDate.parse("1998-06-04"),"46817068096"));
+        cadastroFuncionarios.cadastrar(new FuncionarioManobrista("Beltrano", LocalDate.parse("2000-02-05"),"26424255095","512315133","C",LocalDate.parse("2022-05-06")));
         cadastroFuncionarios.cadastrar(new FuncionarioMotorista("Bruno", LocalDate.parse("1998-12-05"),"69049646000","123156445","D",LocalDate.parse("2024-04-07"),true,true));
-        cadastroFuncionarios.cadastrar(new FuncionarioMotorista("Simm",validaData("1998-08-05"),"27442982042","989545454", "E", validaData("2023-08-05"),true,true));
-        cadastroFuncionarios.cadastrar(new FuncionarioMotorista("Alves",validaData("1991-10-14"),"866678800332","189544122", "B", validaData("2022-03-20"),false,false));
-        cadastroFuncionarios.cadastrar(new FuncionarioMotorista("Gregorio",validaData("1985-04-21"),"45514681009","429518549", "D", validaData("2025-04-07"),false,true));
+        cadastroFuncionarios.cadastrar(new FuncionarioMotorista("Simm",LocalDate.parse("1998-08-05"),"27442982042","989545454", "E", LocalDate.parse("2023-08-05"),true,true));
+        cadastroFuncionarios.cadastrar(new FuncionarioMotorista("Alves",LocalDate.parse("1991-10-14"),"866678800332","189544122", "B", LocalDate.parse("2022-03-20"),false,false));
+        cadastroFuncionarios.cadastrar(new FuncionarioMotorista("Gregorio",LocalDate.parse("1985-04-21"),"45514681009","429518549", "D", LocalDate.parse("2025-04-07"),false,true));
 
         //Cadastro de Veiculos - Base de dados
         cVeiculos.cadastrar(new VeiculoPasseio("HPU8816", "Toyota Corolla", 2021, 1500.0));
