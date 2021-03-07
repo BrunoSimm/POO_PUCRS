@@ -1,0 +1,59 @@
+1) Utilizando a IDE Spring Tool Suite 4 ir até File => New => Spring Starter Project (importar dependencias).
+	1.1) <dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+2) Instalar Postgres e criar a database (acesso via SQL Shell -> Port 5432, password 050819...). 
+	2.1) Criar novo database: create database codeblog;
+	2.2) Entrar/conectar neste banco: \c codeblog;
+	2.3) \d => Lista as tabelas criadas.
+	2.4) \d tb_post => descrição tabela
+3) No projeto, em "application.properties" realizar a configuração para conexão com o db.
+	3.1)spring.jpa.properties.jdbc.lob.non_contextual_creation=trueblog
+		#Banco local - codeblog
+		spring.datasource.url= jdbc:postgresql://localhost:5432/codeblog
+		spring.datasource.username=postgres
+		spring.datasource.password=05081998br
+		spring.jpa.hibernate.ddl-auto=update
+	3.2)spring.jpa.hibernate.ddl-auto=update => Cria tabelas automaticamente no banco de dados através das anotações.
+4)
