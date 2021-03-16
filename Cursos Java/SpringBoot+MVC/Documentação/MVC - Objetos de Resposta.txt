@@ -1,0 +1,77 @@
+MVC - Objetos de Resposta para Requisições.
+
+@ModelMap
+	Objeto usado para enviar dados a página como resposta de uma solicitação.
+	Trabalha como uma resposta do tipo forward (abrem uma página).
+	
+	@Controller
+	@RequestMapping("/computadores")
+	public class CumputadorController {
+	
+		@Autowired
+		private ComputadorDao dao;
+		
+		@GetMapping("/listagem")
+		public String getComputadores(ModelMap model){
+		
+			List<Computador> computadores = dao.findAll();
+			model.addAttribute("computadores", computadores);
+			return "lista"; 
+			
+			//Envia para página lista (.html ou .jsp) uma variável computadores contendo uma lista de computadores.
+			//Depois disso é possível exibir estes computadores na página lista
+		
+		}
+	}
+	
+@ModelAndView
+	Objeto usado para enviar dados a página como resposta de uma solicitação.
+	
+	@Controller
+	@RequestMapping("/computadores")
+	public class CumputadorController {
+	
+		@Autowired
+		private ComputadorDao dao;
+		
+		@GetMapping("/listagem")
+		public ModelAndView getComputadores(){
+			List<Computador> computadores = dao.findAll();
+			ModelAndView model = new ModelAndView("lista"); //String "lista" faz referencia a página de resposta da solicitação.
+			model.addObject("Computadores", computadores); //"Computadores" nome da variável que será enviada p/ página.
+			return model;
+		}
+	}
+	
+@Redirect
+	Redirect é uma operação usada para redirecionar a resposta de uma solicitação a outra solicitação.
+	
+	@Controller
+	@RequestMapping("/computadores")
+	public class CumputadorController {
+	
+		@Autowired
+		private ComputadorDao dao;
+		
+		@GetMapping("/listagem")
+		public ModelAndView getComputadores(){
+			List<Computador> computadores = dao.findAll();
+			ModelAndView model = new ModelAndView("lista"); //String "lista" faz referencia a página de resposta da solicitação.
+			model.addObject("Computadores", computadores); //"Computadores" nome da variável que será enviada p/ página.
+			return model;
+		}
+		
+		@PostMapping("/save")
+		public String addComputador(Computador computador, RedirectAttributes attrib){
+			dao.save(computador);
+			
+			attrib.addFlashAttribute("mensagem","Computador inserido com sucesso"); //("variável", "valor")
+			//Para poder enviar informações via redirect para a página que irá receber o redirect.
+			
+			
+			return "redirect:/computadores/listagem" //Redireciona para outra página, no caso a /listagem
+		}
+		
+		
+	}
+	

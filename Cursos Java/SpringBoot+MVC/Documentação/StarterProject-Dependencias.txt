@@ -1,0 +1,6 @@
+New => Spring Starter Project
+Maven:
+	Spring Web -> Já possibilita o Sring MVC
+	Thymeleaf -> Template de páginas para o MVC.
+	Spring Boot Dev tools -> Servidor web (Tomcat), HotReload etc.
+	Spring Data JPA -> Banco de dados (Utiliza Hibernate), mapeamento objeto relacional.

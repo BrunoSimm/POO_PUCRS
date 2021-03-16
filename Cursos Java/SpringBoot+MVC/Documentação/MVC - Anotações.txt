@@ -1,0 +1,91 @@
+MVC =>
+	Model: Classes de domínio, define o modelo da aplicação (Classes @Entity). Classes de regras de negócio e 
+		   e de persistencia de dados.
+	
+	
+	View: Interação com usuário, representa a entrada e saida de dados.
+	
+	
+	@Controller: Componente intermediário, recebe as requisições do usuário, interage com model em busca da resposta
+				a ser retornada ao usuário.
+			
+Anotações Spring MVC:
+	@Controller: Transforma a classe em um bean do tipo controller do MVC.
+		@Controller
+		public class ComputadorController{}
+		
+	@RequestMapping 
+		Usada para mapear URL's de acesso a um controller e aos métodos contidos neles.
+		Também podemos definidir verbos HTTP(POST,GET...) de acesso aos métodos. Ex:
+		
+		@Controller
+		@RequestMapping("/computadores")
+		public class ComputadorController{
+		
+			@RequestMapping(path = "/listagem", method = RequestMethod.GET)
+			public Sring getComputadores(){}
+		
+		}
+		Podem ser utilizadas no lugar de @RequestMapping, não sendo necessário definir o parametro "method" nestes casos:
+			@GetMapping
+			@PostMapping
+			@PutMapping
+			@DeleteMappping
+			@PatchMapping
+			
+			
+	@PathVariable
+		Tem o objetivo de extrarir da URL um parametro que foi incluido como path da URL.
+		HTTP://localhost:8080/demo/computadores/listagem/ibm
+		
+		@Controller
+		@RequestMapping("/computadores")
+		public class ComputadorController{
+		
+			@RequestMapping(path = "/listagem/{marca}", method = RequestMethod.GET)
+			public Sring getComputadores(@PathVariable("marca") String marca){}
+		
+		}
+
+		
+	@RequestParam
+		Tem o objetivo capturar um parametro de consulta (Query Param) enviado por uma solicitação, que vem no objeto da req.
+		HTTP://localhost:8080/demo/computadores/listagem?marca=ibm
+		
+		@Controller
+		@RequestMapping("/computadores")
+		public class ComputadorController{
+		
+			@RequestMapping(path = "/listagem/{marca}", method = RequestMethod.GET)
+			public Sring getComputadores(@RequestParam(name = "marca") String marca){}
+		
+		}
+		
+	@ModelAttribute
+		Pode ser usado sobre a assinatura de um metodo ou como argumento de um método.
+		
+		@Controller
+		@RequestMapping("/computadores")
+		public class ComputadorController{
+		
+			@PostMapping("/save")//Quando usado em um form. o spring reconhece todos os campo e salva no model atribute.
+			public Sring salvar(@ModelAttribute Computador computador){} 
+			
+			@ModelAttribute("cpus") ??
+			public CpuType[] popula(){
+				return CpyType.values();
+			}
+		
+		}
+		
+		
+	@Valid
+		Anotação responsável por injetar a validação back-end via Hibernate Validator, Bean Validation ou Spring Validator.
+		
+		@Controller
+		@RequestMapping("/computadores")
+		public class ComputadorController{
+		
+			@PostMapping("/save)
+			public Sring salvar(@Valid Computador computador){}
+		}

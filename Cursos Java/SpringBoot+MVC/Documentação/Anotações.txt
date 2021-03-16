@@ -1,0 +1,36 @@
+@Component
+	É uma anotação básica para criar qualquer tipo de bean gerenciado pelo Spring FrameWork.
+	Normalmente usada quando não se define um bean como @Repository ou @Service.
+	
+	@Component
+	public class ComputadorUtil {}
+	
+@Repository
+	Define um bean como sendo do tipo persistente para uso em classes de acesso a banco de dados. A partir desta anotação
+	o Spring pode usar recursos referentes a persistencia, como tratar as exceções especificas para este fim.
+	@Repository
+	public class ComputadorDao {}
+	
+@Service
+	Usado para classes do tipo serviço (Serive Layer), que possuem, por exemplo, regras de negócios.
+	@Service
+	public class ComputadorService {}
+	
+Injetar Beans
+
+@Autowired
+	Anotação usada para informar ao Spring que ele deve injetar a variável anotada na classe em que está declarada.
+	
+	@Service
+	public class ComputadorService {
+		
+		@Autowired
+		private ComputadorDao dao;
+		
+		public void salvar(COmputador computador){
+			dao.saveOrUpdate(computador);
+		}
+	
+	
+	}
+	

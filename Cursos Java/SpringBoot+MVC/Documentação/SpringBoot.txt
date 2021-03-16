@@ -1,0 +1,3 @@
+Spring-Boot - Facilitar o processo de configuração e publicação das aplicações através de convenções de configuração.
+
+<parent> -> Contem a versão do spring boot.

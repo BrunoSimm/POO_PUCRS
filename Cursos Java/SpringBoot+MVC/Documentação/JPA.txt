@@ -1,0 +1,55 @@
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+
+Com a inclusão desta dependencia termos então acesso a todos os recursos da JPA e Hibernate 
+para os mapeamentos, operações de CRUD e até mesmo para validações com Hibernate Validator.
+
+Classes de entidades são aquelas que têm relação com as tabelas do banco de dados. Em um banco
+ de dados, cada linha de uma tabela é também chamada de entidade, sendo assim, uma classe 
+ é conhecida como classe de entidade porque representa uma linha de uma tabela.
+
+As classes de entidades serão mapeadas via anotações da especificação JPA, 
+algumas dessas anotações estão descritas a seguir:
+
+@Entity: Usada sobre a assinatura da classe para marcá-la perante o
+Hibernate/JPA que esta é uma classe de mapeamento objeto relacional;
+
+@Table: Informa ao Hibernate/JPA que a tabela que está sendo mapeada
+é aquela com o nome descrito na propriedade name da anotação. A
+anotação ainda possui a propriedade indexes, onde foi configurado um
+índice que não permite que mais de uma linha na tabela contenha
+registros com o mesmo título e mesma data de início;
+
+@Id: Usada para mapear a coluna referente à chave primária da tabela.
+Esta anotação é obrigatória no mapeamento. Caso não seja adicionada
+uma exceção será lançada em tempo de execução;
+
+@GeneratedValue: É utilizada para informar que a geração da chave
+primária da entidade será gerenciada pelo Hibernate e deve ser
+adicionada junto a anotação @Id. Quando não anotamos o campo com
+essa opção, significa que a responsabilidade de gerar e gerenciar as
+chaves primárias serão da aplicação;
+
+@Column: Seu uso tem como finalidade mapear uma coluna da tabela. Se
+essa anotação não for declarada, o nome do atributo deverá ter o
+mesmo nome da coluna. Essa anotação possui alguns atributos para
+definir, por exemplo, se a coluna aceita valores nulos ou não
+(nullable), o tamanho de uma coluna varchar (length), entre outros;
+
+@Enumerated: Usada para mapear uma coluna a partir de um atributo do
+tipo enum. Assim, podemos indicar se vamos gravar esse dado de forma ordinal, 
+a partir da posição do tipo declarado no enum, ou pelo da constante.
+
+@OneToOne: Sua função é mapear o relacionamento entre duas tabelas no banco de dados que 
+tenha relação do tipo 1x1.
+
+@OneToMany: Para mapear o lado fraco da relação um para muitos. O lado fraco é o lado 1, 
+já lado forte seria o lado N da relação. Nessa anotação devemos incluir o atributo mappedBy 
+com o nome do atributo que representa o lado fraco lá no mapeamento da classe de lado forte.
+
+@ManyToOne: Tem como objetivo mapear o atributo referente a chave estrangeira em um 
+relacionamento 1xN. A classe anotada com essa anotação é considerada o lado forte da relação 1xN.
+@JoinColumn: Uma de suas funções é nomear a chave estrangeira de um relacionamento 1xN ou 1x1. 
+Deve ser declarada sobre o atributo que representa a chave estrangeira.
