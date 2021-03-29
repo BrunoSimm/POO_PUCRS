@@ -1,20 +1,44 @@
 package com.brunosimm.web.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.brunosimm.domain.Cargo;
+import com.brunosimm.domain.Departamento;
+import com.brunosimm.repository.CargoRepository;
+import com.brunosimm.repository.DepartamentoRepository;
+import com.brunosimm.service.CargoService;
 
 @Controller
 @RequestMapping("/cargos")
 public class CargoController {
+	
+	@Autowired
+	CargoRepository cargoRepository;
+	
+	@Autowired
+	CargoService cargoService;
+	
+	@Autowired
+	DepartamentoRepository departamentoRepository;
 
 	@GetMapping("/cadastrar")
-	public String cadastrar() {
+	public String cadastrar(Cargo cargo) {
 		return "/cargo/cadastro";
 	}
 	
 	@GetMapping("/listar")
-	public String listar() {
+	public String listar(ModelMap model) {
+		model.addAttribute("cargos", cargoRepository.findAll());
 		return "/cargo/lista";
 	}
 	
@@ -28,5 +52,32 @@ public class CargoController {
 		return "redirect:/cargos/listar";
 	}
 	
+	@PostMapping("/salvar")
+	public String salvar(Cargo cargo, RedirectAttributes attr) {
+		/*if (cargoRepository.findById(cargo.getId()).isEmpty()) {
+			attr.addAttribute("fail","Cargo não adicionado. Já existe um cargo com este nome.");
+		} else {*/
+			cargoRepository.save(cargo);
+			attr.addFlashAttribute("success","Cargo inserido com sucesso.");
+			return "redirect:/cargos/cadastrar";
+	}
+	
+	@GetMapping("/editar/{id}")
+	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
+		model.addAttribute("cargo", cargoService.buscarPorId(id));
+		return "cargo/cadastro";
+	}
+	
+	@PostMapping("/editar")
+	public String editar(Cargo cargo, RedirectAttributes attr) {
+		cargoService.editar(cargo);
+		attr.addFlashAttribute("success","Registro atualizado com sucesso");
+		return "redirect:/cargos/cadastrar";
+	}
+	
+	@ModelAttribute("departamentos")
+	public List<Departamento> listaDepartamentos(){
+		return departamentoRepository.findAll();
+	}
 	
 }

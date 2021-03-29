@@ -1,0 +1,28 @@
+Acesso via pgAdmin 4
+Acesso via pgAdmin 4
+Acesso via pgAdmin 4 - Criar Database
+
+
+Instalar Postgres e criar a database (acesso via SQL Shell -> Port 5432, password 050819...). 
+	2.1) Criar novo database: create database demo_mvc;
+	2.2) Entrar/conectar neste banco: \c demo_mvc;
+	2.3) \d => Lista as tabelas criadas.
+	2.4) \d  => descrição tabela
+	
+application.properties =
+	# MySQL -> Postgres
+		spring.datasource.url= jdbc:postgresql://localhost:5432/demo_mvc?createDatabaseIfNotExist=true
+		spring.datasource.username=postgres
+		spring.datasource.password=05081998br
+
+	# JPA
+		spring.jpa.show-sql=true
+		spring.jpa.hibernate.ddl-auto= update
+		spring.jpa.open-in-view= true
+		
+		
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>

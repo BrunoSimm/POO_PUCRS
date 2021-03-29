@@ -1,0 +1,100 @@
+Resumo da Seção 7
+
+Thyemeleaf Layout
+
+Durante esta seção o tópico principal será baseado em criar um template para nossas páginas baseado em um layout padrão. Deste modo, todas aquelas partes das páginas que se repetem como cabeçalho, rodapé, sidebar e até mesmo o corpo das páginas, serão transformados em fragmentos.
+
+Estes fragmentos são divididos em páginas separadas e importados em um página principal, que será a página de layout padrão. Para trabalhar com esse tipo de recurso o Thymeleaf fornece alguns componentes para este fim, que são:
+
+th:insert - é o mais simples: ele simplesmente vai inserir o fragmento como o corpo de uma tag na página de destino.
+th:replace - substitui a tag da página de destino pelo fragmento.
+th:include - é semelhante ao th: insert, mas em vez de inserir o fragmento, ele apenas insere o conteúdo desse fragmento.
+th:fragment - define um trecho de html como um fragmento de página.
+Agora que conhecemos os componentes para lidar com fragmentos, vamos ver um breve exemplo de código. Para isso, suponha que a html exibido a seguir esteja presente na página footer.html:
+
+<div class="footer-css">
+    <span class="text-muted">©  2018 Udemy</span>
+</div>
+Para transformar esse código em um fragmento, se deve adicionar a tag principal o componente th:fragment tendo como valor o nome dado ao fragmento. Veja o exemplo no código a seguir:
+
+<div class="footer-css" th:fragment="rodape">
+    <span class="text-muted">©  2018 Udemy</span>
+</div>
+Desta forma, a página footer.html tem um fragmento que pode ser incluído em outras páginas, ao invés, de ficar repetindo esse trecho código em cada página da aplicação.
+Agora, suponha que temos a página index.html e nela vamos incluir o fragmento de rodapé.
+
+<!DOCTYPE html>    
+<html xmlns:th="http://www.thymeleaf.org">    
+<head>    
+    <meta http-equiv="Content-Type" 
+          content="text/html; charset=UTF-8">    
+    <title>Thymeleaf</title>    
+</head>    
+<body>    
+    <div>    
+        <div>Qualquer outro contéudo aqui</div>   
+    </div>    
+    <div class="container">    
+        <div>O corpo da página poderia estar aqui</div>   
+    </div>    
+    <footer th:replace="footer :: rodape">    
+        <span>O rodapé será inserido aqui!</span>    
+    </footer>    
+</body>    
+</html>
+Analisando o código apresentado veja que em <footer> foi adicionado o componente th:replace. Esse componente tem como valor uma string separada por ::. Ao lado esquerdo da instrução temos o nome da página que contém o fragmento e ao lado direito temos o nome dado ao fragmento. Desta forma, sempre que a página index.html for aberta o fragmento de rodapé vai substituir a tag <footer> pelo código do rodapé que temos na página footer.html.
+
+Observe também, que em <html> temos a instrução que nos da acesso ao componentes do Thymeleaf. Essa instrução é o namespace: xmlns:th="http://www.thymeleaf.org"
+
+Há também um projeto secundário que foi oficializado pelo Thyemeleaf para a inclusão de fragmentos quando estes dependem de páginas que devem ser abertas por meio de requisições. Ou seja, o fragmento de rodapé é um fragmento fixo, ele não se modifica a cada diferente página que será aberta em sua aplicação. Já o corpo das páginas, que contém os formulários ou tabelas de dados podem ser modificados conforme cada página que se abre. Uma página de cadastro do funcionários pode ter o formulário diferente da página de cadastro de departamentos. Para que este tipo de situação se torne mais fácil de se lidar entre o controller, as requisições e os fragmento do corpo das páginas, foi criado este projeto secundário.
+
+O projeto em questão precisa ser incluído a aplicação na forma de uma dependência do Maven e a partir dai vamos ter acesso aos componentes deste projeto que devem ser incluídos nas páginas para lidar com os layouts.
+
+    <dependency>
+        <groupId>nz.net.ultraq.thymeleaf</groupId>
+        <artifactId>thymeleaf-layout-dialect</artifactId>
+    </dependency>
+A primeira instrução que deve ser adicionada as páginas é o namespace: xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout". Com sua inclusão teremos acesso a dois importantes componentes:
+
+layout:fragment - tem como finalidade criar e nomear o fragmento de página, tem um propósito similar ao th:fragment. Porém, ele também deve ser usado para carregar o fragmento na página de destino, em substituição ao th:replace.
+layout:decorate - deve ser incluído na tag <html> da página de fragmento. Seu objetivo é informar a página de fragmento qual será a página de destino deste fragmento. Sendo assim, como valor passamos a instrução ~{nome da página de destino}.
+Veja agora um exemplo da página cadastro.html que será usado como um fragmento:
+
+<!DOCTYPE html>    
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{index}">    
+<head>    
+    <meta http-equiv="Content-Type" 
+          content="text/html; charset=UTF-8">    
+</head>    
+<body>    
+    <div class="container" layout:fragment="corpo">    
+        <form action="#" method="post">
+            <!--código omitido -->
+        </form>   
+    </div>    
+</body>    
+</html>
+Agora, na página index.html importamos este fragmento da seguinte forma:
+
+<!DOCTYPE html>    
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">    
+<head>    
+    <meta http-equiv="Content-Type" 
+          content="text/html; charset=UTF-8">    
+</head>    
+<body>    
+    <div>    
+        <div>Qualquer outro contéudo aqui</div>   
+    </div>    
+    <div class="container" layout:fragment="corpo">    
+        <div>O corpo da página poderia estar aqui</div>   
+    </div>    
+    <footer th:replace="footer :: rodape">    
+        <span>O rodapé será inserido aqui!</span>    
+    </footer>    
+</body>    
+</html>
+Observe que no <div> referente ao corpo da página temos a instrução layout:fragment="corpo". Esta instrução está dizendo que um fragmento nomeado como corpo deverá ser incluído neste local. Assim, qualquer página de fragmento, referente ao corpo de uma página, como a cadastro.html, será aberta neste local se a requisição for direcionada a ela.

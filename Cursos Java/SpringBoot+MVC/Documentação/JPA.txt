@@ -53,3 +53,13 @@ com o nome do atributo que representa o lado fraco lá no mapeamento da classe d
 relacionamento 1xN. A classe anotada com essa anotação é considerada o lado forte da relação 1xN.
 @JoinColumn: Uma de suas funções é nomear a chave estrangeira de um relacionamento 1xN ou 1x1. 
 Deve ser declarada sobre o atributo que representa a chave estrangeira.
+
+@Transactional
+	@Transactional da assinatura da classe tem um atributo readOnly setado como false por padrão. 
+	Esse atributo, o readOnly, vai informar ao Spring que a transação não é apenas de leitura, ou seja, 
+	ela deve ser usada tanto em métodos de consulta como de escrita.
+
+	readOnly foi setado como true. 
+	Nesse caso, os métodos serão específicos para leitura. Esse comportamento vai fazer com 
+	que não seja aberta uma transação quando o método de consulta for executado, liberando assim, 
+	o acesso a tabela em questão para outras operações. Essa prática melhora a performance do banco de dados.
