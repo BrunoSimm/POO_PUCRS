@@ -54,11 +54,13 @@ public class CargoController {
 	
 	@PostMapping("/salvar")
 	public String salvar(Cargo cargo, RedirectAttributes attr) {
-		/*if (cargoRepository.findById(cargo.getId()).isEmpty()) {
-			attr.addAttribute("fail","Cargo não adicionado. Já existe um cargo com este nome.");
-		} else {*/
+		if (cargo.getDepartamento() == null) {
+			attr.addFlashAttribute("fail","Selecione um departamento!");
+			return "redirect:/cargos/cadastrar";
+		} else {
 			cargoRepository.save(cargo);
 			attr.addFlashAttribute("success","Cargo inserido com sucesso.");
+		}
 			return "redirect:/cargos/cadastrar";
 	}
 	
@@ -73,6 +75,17 @@ public class CargoController {
 		cargoService.editar(cargo);
 		attr.addFlashAttribute("success","Registro atualizado com sucesso");
 		return "redirect:/cargos/cadastrar";
+	}
+	
+	@GetMapping("/excluir/{id}")
+	public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
+		if (cargoService.cargoTemFuncionarios(id) == false) {
+			cargoService.excluir(id);
+			attr.addFlashAttribute("success","Cargo excluido com sucesso.");
+		} else {
+			attr.addFlashAttribute("fail","Cargo não excluido. Possui funcionário(s) vinculado(s).");
+		}
+		return "redirect:/cargos/listar";
 	}
 	
 	@ModelAttribute("departamentos")

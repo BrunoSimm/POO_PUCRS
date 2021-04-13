@@ -1,0 +1,37 @@
+Entradas: nome, score, tamanho atual da lista
+
+Criar base de teste com alguns elementos (menos de 10, para testar a inserção).
+
+- Pontuação
+p1 - score > scoreUltimoColocado
+p2 - score < scoreUltimoColocado
+p3 - score inválido (<0)
+p4 - score == scoreUltimoColocado
+
+- Tamanho da lista
+T1 - Lista vazia
+T2 - tamanho atual da lista < 10
+T3 - tamanho atual da lista == 10
+T4 - tamanho atual da lista > 10 (Exception)
+
+Casos de teste:
+(P1,T1,insere na lista, P1 passar a ser o score de indice 0)
+(P1,T2=1,insere na lista,P1 passa a ser o score de indice 1)
+(P1,T3,insere, P1 passa a ser o indice 9)
+(P1,T4,Exception)
+(P2,T1,insere,)
+(P2,T2,insere,)
+(P2,T3,não insere,)
+(P3,T1,Exception)
+
+
+
+
+
+
+
+p1 - n%3=0 (n,"Fizz!")
+p2 - n%5=0 (n,"Buzz!")
+p3 - n%5 & n%3 =0 (n,"Buzz!")
+p4
+p5
