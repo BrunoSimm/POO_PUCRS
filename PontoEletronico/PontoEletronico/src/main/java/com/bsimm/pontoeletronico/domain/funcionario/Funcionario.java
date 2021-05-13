@@ -1,5 +1,7 @@
 package com.bsimm.pontoeletronico.domain.funcionario;
 
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -39,7 +41,7 @@ public class Funcionario extends AbstractEntity<Long> {
 	
 	@Column(unique = true)
 	@CPF
-	@NotBlank
+	@NotBlank(message = "CPF deve ser informado.")
 	private String cpf;
 	
 	@NotBlank(message = "Telefone deve ser preenchido.")
@@ -47,7 +49,7 @@ public class Funcionario extends AbstractEntity<Long> {
 	@Column(name = "fone")
 	private String telefone;
 	
-	@NotBlank(message = "Email deve ser preenchido.")
+	@NotBlank(message = "Email deve ser preenchido adequadamente.")
 	@Email(message = "Insira um email válido.")
 	@Size(max = 255)
 	private String email;
@@ -58,24 +60,28 @@ public class Funcionario extends AbstractEntity<Long> {
 	private Permissoes permissoes;
 	
 	@Column
-	@NotBlank(message = "Horário de inicio do dia de trabalho deve ser preenchido. Exemplo: 08:12:00")
+	@NotNull(message = "Horario de Inicio não pode ser nulo.")
+	//@NotBlank(message = "Horário de inicio do dia de trabalho deve ser preenchido. Exemplo: 08:12:00")
 	//@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "hh:mm:ss")
-	@Pattern(regexp="\\d{2}\\:\\d{2}", message = "Horário de Inicio deve seguir o padrão hh:mm")
-	private String horarioInicio;
+	private LocalTime horarioInicio;
+	
+	//TODO -> VERIFICAR VALIDAÇÕES DA CHAMADA CADASTRA FUNCIONARIO
 	
 	@Column
-	@NotBlank(message = "Horário de saida do dia de trabalho deve ser preenchido. Exemplo: 18:00:00")
-	//@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "hh:mm:ss")
-	@Pattern(regexp="\\d{2}\\:\\d{2}", message = "Horário de Saida (final do turno) deve seguir o padrão hh:mm")
-	private String horarioSaida;
+	@NotNull(message = "Horario de Saída não pode ser nulo.")
+	private LocalTime horarioSaida;
 	
 	@Column
-	@NotBlank(message = "O tempo de intervalo deve ser informado")
-	@Pattern(regexp="\\d{2}\\:\\d{2}", message = "Tempo de intervalo deve seguir o padrão hh:mm")
-	private String tempoIntervalo;
+	@NotNull(message = "Tempo de intervalo não pode ser nulo.")
+	//@NotBlank(message = "O tempo de intervalo deve ser informado")
+	private LocalTime tempoIntervalo;
 	
 	@Column(nullable = true)
-	private double bancoDeHoras;
+	private LocalTime bancoDeHoras;
+	
+	// 1 funcionario p/ n RegistroPonto
+	@OneToMany(mappedBy = "funcionario") //"funcionario" => Nome do atributo no lado forte ( Many (RegistroPonto))
+	private List<RegistroPonto> registrosPonto;
 	
 	public String getCpf() {
 		return cpf;
@@ -93,15 +99,13 @@ public class Funcionario extends AbstractEntity<Long> {
 		this.permissoes = permissoes;
 	}
 
-	public void setBancoDeHoras(double bancoDeHoras) {
+	public void setBancoDeHoras(LocalTime bancoDeHoras) {
 		this.bancoDeHoras = bancoDeHoras;
 	}
 
-	// 1 funcionario p/ n RegistroPonto
-	@OneToMany(mappedBy = "funcionario") //"funcionario" => Nome do atributo no lado forte ( Many (RegistroPonto))
-	private List<RegistroPonto> registrosPonto;
 	
-	public double getBancoDeHoras() {
+	
+	public LocalTime getBancoDeHoras() {
 		return bancoDeHoras;
 	}
 
@@ -137,19 +141,19 @@ public class Funcionario extends AbstractEntity<Long> {
 		this.cargo = cargo;
 	}
 
-	public String getHorarioInicio() {
+	public LocalTime getHorarioInicio() {
 		return horarioInicio;
 	}
 
-	public void setHorarioInicio(String horarioInicio) {
+	public void setHorarioInicio(LocalTime horarioInicio) {
 		this.horarioInicio = horarioInicio;
 	}
 
-	public String getHorarioSaida() {
+	public LocalTime getHorarioSaida() {
 		return horarioSaida;
 	}
 
-	public void setHorarioSaida(String horarioSaida) {
+	public void setHorarioSaida(LocalTime horarioSaida) {
 		this.horarioSaida = horarioSaida;
 	}
 
@@ -161,12 +165,22 @@ public class Funcionario extends AbstractEntity<Long> {
 		this.registrosPonto = registrosPonto;
 	}
 
-	public String getTempoIntervalo() {
+	public LocalTime getTempoIntervalo() {
 		return tempoIntervalo;
 	}
 
-	public void setTempoIntervalo(String tempoIntervalo) {
+	public void setTempoIntervalo(LocalTime tempoIntervalo) {
 		this.tempoIntervalo = tempoIntervalo;
 	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	
+	
 	
 }

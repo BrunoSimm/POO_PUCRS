@@ -1,6 +1,6 @@
 package com.bsimm.pontoeletronico.domain.registroponto;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,8 +27,8 @@ public class RegistroPonto extends AbstractEntity<Long> {
 	private Funcionario funcionario;
 	
 	@Column (name = "data_registro")
-	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy:HH:mm:ss")
-	private LocalDate dataRegistro;
+	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy:HH:mm")
+	private LocalDateTime dataRegistro;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
@@ -39,7 +39,6 @@ public class RegistroPonto extends AbstractEntity<Long> {
 	@Nullable
 	private String justificativa;//Utilizado em casos de atrasos ou saidas antecipadas.
 	
-
 	public Funcionario getFuncionario() {
 		return funcionario;
 	}
@@ -48,11 +47,11 @@ public class RegistroPonto extends AbstractEntity<Long> {
 		this.funcionario = funcionario;
 	}
 
-	public LocalDate getDataRegistro() {
+	public LocalDateTime getDataRegistro() {
 		return dataRegistro;
 	}
 
-	public void setDataRegistro(LocalDate dataRegistro) {
+	public void setDataRegistro(LocalDateTime dataRegistro) {
 		this.dataRegistro = dataRegistro;
 	}
 	
